@@ -13,6 +13,7 @@ exports.BotInfo = {
     "Token": "Nzk4NjUzNTUzNzk5MjAwNzk4.X_4KFQ.60TZ3sD-hN6pKjNS7j7L2_7XL2U"
 }
 
+
 exports.CurrentMSG = {
     "Cmd": "",
     "Fullmsg": "",
