@@ -8,7 +8,7 @@ exports.BotInfo = {
     "Bot_Invite": "https://discord.com/api/oauth2/authorize?client_id=798653553799200798&permissions=8&scope=bot",
     "Server_Invite": "https://discord.gg/XuZNExsZjg",
     "Creators": "GDKScrapy, draco",
-    "Token": "Nzk4NjUzNTUzNzk5MjAwNzk4.X_4KFQ.aiE1SoinE426Agpb4pXZqYqfzh4"
+    "Token": "Nzk4NjUzNTUzNzk5MjAwNzk4.X_4KFQ.60TZ3sD-hN6pKjNS7j7L2_7XL2U"
 }
 
 exports.CurrentMSG = {
