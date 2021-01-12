@@ -55,6 +55,7 @@ client.on('message', async (message) => {
       fetch("https://scrapy.tech/tools/?action=pscan&q="+ip).then(res => res.text()).then(body => {
         pscan(body);
       });
+      
       attackmsg();
     }
   } else if(message.content.startsWith(config.BotInfo.Prefix + "register")) {
@@ -62,45 +63,18 @@ client.on('message', async (message) => {
   } else if(message.channel.startsWith(config.BotInfo.Prefix)) {
       message.channel.send("Error, You aren't registered ");
   }
+
+  function sendmsg(titled, descriptiond) {
+    message.channel.send({embed: {
+        color: 16711680,
+        title: "Traumatized | "  + titled,
+        description: descriptiond,
+        footer: { text: `Traumatized | Created & Developed By: Traumatized Security | Main Server: ttps://discord.gg/9CAqV29Mjd`}
+    }});
+  }
 });
 
 
-function sendmsg(titled, descriptiond) {
-  message.channel.send({embed: {
-      color: 16711680,
-      title: "Traumatized | "  + titled,
-      description: descriptiond,
-      footer: { text: `Traumatized | Created & Developed By: Traumatized Security | Main Server: ttps://discord.gg/9CAqV29Mjd`}
-    }
-  });
-}
-
-function help() {
-  message.channel.send({embed: {
-    color: 16711680,
-    title: "Traumatized | Help",
-    description: "These Are The List Of Commands.\nHelp | Shows The List Of Commands\nMethods | Shows The List Of Methods\n\nTools\nGeo | Shows Details Of A Ip Address\nPscan | Shows The Most Common Ports\n\nAdmin Commands\nAddusr | Adds A User To The Database\nRemoveusr | Removes A User From The Database\nUpdateusr | Updates A User In The Database",
-    footer: { text: `Traumatized | Created & Developed By: Traumatized Security | Main Server: ttps://discord.gg/9CAqV29Mjd`}
-  }});
-}
-
-function geo(body) {
-  message.channel.send({embed: {
-    color: 16711680,
-    title: "Traumatized | Geo",
-    description: "Geo Lookup Results\n" + body,
-    footer: { text: `Traumatized | Created & Developed By: Traumatized Security | Main Server: ttps://discord.gg/9CAqV29Mjd`}
-  }});
-}
-
-function pscan(body) {
-  message.channel.send({embed: {
-    color: 16711680,
-    title: "Traumatized | Pscan",
-    description: "Pscan Results\n" + body,
-    footer: { text: `Traumatized | Created & Developed By: Traumatized Security | Main Server: ttps://discord.gg/9CAqV29Mjd`}
-  }});
-}
 
 var API1 = "";
   
