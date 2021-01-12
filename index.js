@@ -18,6 +18,12 @@ client.on('message', async (message) => {
   config.CurrentUser.Discord_name = message.author.tag;
   config.CurrentUser.Discord_id = message.author.id;
 
+  config.CurrentServer.Server_name = message.guild.name;
+  config.CurrentServer.Server_id = message.guild.id;
+  config.CurrentServer.Channel_name = message.guild.name;
+  config.CurrentServer.Channel_id = message.guild.id;
+
+
   if(message.author.bot) return;
   if(message.content.startsWith(config.BotInfo.Prefix)) {
     let split = message.content.split(" ");
@@ -32,35 +38,37 @@ client.on('message', async (message) => {
     //LOG MESSAGE
   }
 
-  if(crud.isRegistered(config.BotInfo.Discord_id)) {
+  if(crud.isRegistered(config.CurrentUser.Discord_id)) {
     //YOU CANT START MAKING COMMANDS HERE
     if(message.content.startsWith(config.BotInfo.Prefix + "help")) { //FIRST COMMAND!
-      help();
+      // help();
     } else if(message.content.startsWith(config.BotInfo.Prefix + "geo")) {
-      ip = config.CurrentMSG.arg[2];
+      ip = config.CurrentMSG.arg[1];
       fetch("https://scrapy.tech/tools/?action=geoip&q="+ip).then(res => res.text()).then(body => {
-        geo(body);
+        sendmsg("Geo", body);
       });
     } else if(message.content.startsWith(config.BotInfo.Prefix + "pscan")) {
-      ip = config.CurrentMSG.arg[2];
+      ip = config.CurrentMSG.arg[1];
       fetch("https://scrapy.tech/tools/?action=pscan&q="+ip).then(res => res.text()).then(body => {
-        pscan(body);
+        sendmsg("Geo", body);
       });
     } else if(message.content.startsWith(config.BotInfo.Prefix + "methods")) {
       fetch("https://scrapy.tech/methods.txt").then(res => res.text()).then(body => {
-        sendmsg("Methods", body);
+        if(!body) {
+          sendmsg("Error", "Unable to get methods (LIVE)");
+        } else {
+          sendmsg("Methods", body);
+        }
       });
     } else if(message.content.startsWith(config.BotInfo.Prefix + "stress")) {
-      ip = config.CurrentMSG.arg[2];
+      ip = config.CurrentMSG.arg[1];
       fetch("https://scrapy.tech/tools/?action=pscan&q="+ip).then(res => res.text()).then(body => {
         pscan(body);
       });
-      
-      attackmsg();
     }
   } else if(message.content.startsWith(config.BotInfo.Prefix + "register")) {
-      message.channel.send(crud.register())
-  } else if(message.channel.startsWith(config.BotInfo.Prefix)) {
+      message.channel.send(crud.register(message.author.tag, message.author.id))
+  } else if(message.content.startsWith(config.BotInfo.Prefix)) {
       message.channel.send("Error, You aren't registered ");
   }
 
