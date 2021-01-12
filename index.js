@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const config = require("./src/config.js");
 
 //Bot on ready
 
@@ -12,11 +13,19 @@ client.on('ready', () => {
 
 client.on('message', async (message) => {
     if (message.author.bot) return;
-    if (message.content.indexOf(config.prefix) !== 0) return;
-    const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
-    const command = args.shift().toLowerCase();
+    if (message.content.startsWith(config.prefix)) {
+      let split = message.content.split(" ");
+      let i = 0;
+      split.forEach(e => {
+        config.CurrentMSG.arg[i] = e;
+        i++;
+      })
+      config.CurrentMSG.cmd = config.CurrentMSG.arg[0];
+    } else {
+      
+    }
 });
 
 
   
-client.login('VERY-SECRET-TOKEN');
+client.login(config.BotInfo.Token);
