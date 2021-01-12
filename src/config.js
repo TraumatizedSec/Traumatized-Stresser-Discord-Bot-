@@ -5,10 +5,10 @@ exports.BotInfo = {
     "Name": "Traumatized Stress",
     "Description": "Discord's Best DDOS BOT OUT",
     "Version": "1.00",
-    "Bot_Invite": "",
-    "Server_Invite": "",
+    "Bot_Invite": "https://discord.com/api/oauth2/authorize?client_id=798653553799200798&permissions=8&scope=bot",
+    "Server_Invite": "https://discord.gg/XuZNExsZjg",
     "Creators": "GDKScrapy, draco",
-    "Token": "Nzk1MDA2MTgyMjEyNzYzNjky.X_DFNA.JnWqP1EXKTLpJzPIsuIeyqihKFU"
+    "Token": "Nzk4NjUzNTUzNzk5MjAwNzk4.X_4KFQ.aiE1SoinE426Agpb4pXZqYqfzh4"
 }
 
 exports.CurrentMSG = {
