@@ -1,11 +1,8 @@
 const fs = require("fs");
 
-exports.current = {
-    "username": "",
-    "id": "",
-    "level": "",
-    "maxtime": "",
-    "admin": "",
+
+exports.CurrentMSG = {
+    "fullmsg": "",
     "arg": []
 }
 
@@ -14,9 +11,11 @@ exports.CurrentUser = {
     "arg": []
 }
 
-exports.CurrentMSG = {
-    "fullmsg": "",
-    "arg": []
+exports.CurrentServer = {
+    "server_name": "",
+    "server_id": "",
+    "channel_name": "",
+    "channel_id": "",
 }
 
 //exports.get_user_stats = function (discord_id, user) {
