@@ -1,5 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const config = require("./src/config.js");
+const crud = require("./src/crud.js");
 
 //Bot on ready
 
@@ -11,11 +13,31 @@ client.on('ready', () => {
 //Command handler
 
 client.on('message', async (message) => {
-    if (message.author.bot) return;
-    if (message.content.indexOf(config.prefix) !== 0) return;
-    const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
-    const command = args.shift().toLowerCase();
-  });
+  if (message.author.bot) return;
+  if (message.content.startsWith(config.prefix)) {
+    let split = message.content.split(" ");
+    let i = 0;
+    split.forEach(e => {
+      config.CurrentMSG.arg[i] = e;
+      i++;
+    })
+    config.CurrentMSG.Cmd = config.CurrentMSG.arg[0].replace(config.BotInfo.Prefix);
+    //LOG COMMAND
+  } else {
+    //LOG MESSAGE
+  }
+
+  if(crud.isRegistered(config.CurrentUser.Discord_id)) {
+    if(config.CurrentMSG.Cmd == "")
+
+  } else if(message.content == config.BotInfo.prefix + "register") {
+    //REGISTER FUNCTION HERE
+  } else {
+    message.channel.send("Error, you aren't registered to use this bot. In order to register type ``" + config.prefix + "register``!!")
+  }
+
+});
+
 
 function sendmsg(titled, descriptiond) {
   message.channel.send({embed: {
@@ -29,4 +51,4 @@ function sendmsg(titled, descriptiond) {
 
 var DORKAPI = "";
   
-client.login('VERY-SECRET-TOKEN');
+client.login(config.BotInfo.Token);
