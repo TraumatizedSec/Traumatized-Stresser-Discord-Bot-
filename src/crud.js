@@ -20,8 +20,8 @@ exports.user = function(discord_id, type) {
     let db_admin = "";
 
     let data = fs.readFileSync("../db/users.db", "utf8");
-    let fix = data.replace("('", "");
-    let fix2 = fix.replace("')", "");
+    let fix = data.split("('").join("");
+    let fix2 = fix.split("')").join("");
     let fix3 = fix2.split("','").join(",");
     let users = fix3.split("\n");
     users.forEach(u => {
@@ -64,7 +64,6 @@ exports.update = function(discord_id, type, new_stat) {
    /*
    Read Db and Check for user stats
    */
-   let found_check = false;
    let db_user = "";
    let db_level = "";
    let db_maxtime = "";
@@ -75,20 +74,25 @@ exports.update = function(discord_id, type, new_stat) {
    db_user = split_info[0];
    db_level = split_info[2];
    db_maxtime = split_info[3];
-   db_admin = split_info[4]
+   db_admin = split_info[4];
 
-   if(found_check == false) {
+   crud.remove(discord_id);
+
+   if(!get_user) {
        return "No user found";
    } else {
        switch(type) {
            case stat_types[0]:
-               fs.appendFileSync("../db/users.db", "('" + db_user + "','" + discord_id + "','" + new_stat + "','" + db_maxtime + "','" + db_admin + "')\n");
+               fs.appendFileSync("../db/users.db", "('" + db_user + "','" + discord_id + "','" + new_stat + "','" + db_maxtime + "','" + db_admin + "')");
+               fs.appendFileSync("../db/users.db", "\n");
                return "Added";
            case stat_types[1]:
-                fs.appendFileSync("../db/users.db", "('" + db_user + "','" + discord_id + "','" + db_level + "','" + new_stat + "','" + db_admin + "')\n");
+                fs.appendFileSync("../db/users.db", "('" + db_user + "','" + discord_id + "','" + db_level + "','" + new_stat + "','" + db_admin + "')");
+                fs.appendFileSync("../db/users.db", "\n");
                 return "Added";
            case stat_types[2]:
-                fs.appendFileSync("../db/users.db", "('" + db_user + "','" + discord_id + "','" + db_level + "','" + db_maxtime + "','" + new_stat + "')\n");
+                fs.appendFileSync("../db/users.db", "('" + db_user + "','" + discord_id + "','" + db_level + "','" + db_maxtime + "','" + new_stat + "')");
+                fs.appendFileSync("../db/users.db", "\n");
                 return "Added";
        }
    }
@@ -101,10 +105,12 @@ exports.remove = function(discord_id) {
     users.forEach(u => {
         if(u.includes(discord_id)) {
             
-        } else {
+        } else if(u.length > 5) {
             new_db += u + "\n";
         }
     })
+
+    fs.writeFileSync("../db/users.db", new_db);
 
     if(new_db) {
         return "User removed";
