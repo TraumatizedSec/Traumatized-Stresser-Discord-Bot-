@@ -5,5 +5,6 @@ exports.current = {
     "id": "",
     "level": "",
     "maxtime": "",
+    "admin": "",
     "args": []
 }
