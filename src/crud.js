@@ -118,3 +118,18 @@ exports.remove = function(discord_id) {
         return "Unable to remove user";
     }
 }
+
+exports.isRegistered = function(discord_id) {
+    let get_user = crud.user(discord_id, "all");
+    if(get_user == "Error, Invalid stat type!" || get_user == "No user found") {
+        return false;
+    } else if(get_user.includes(discord_id)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+exports.register = function(discord_name, discord_id) {
+
+}
