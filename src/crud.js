@@ -141,5 +141,10 @@ exports.register = function() {
 }
 
 exports.isPremium = function(discord_id) {
-    let get_user = crud.user(discord_id);
+    let get_user = crud.user(discord_id, "level");
+    if(get_user == "0") {
+        return false;
+    } else {
+        return true;
+    }
 }
