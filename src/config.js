@@ -18,6 +18,6 @@ exports.CurrentServer = {
     "channel_id": "",
 }
 
-//exports.get_user_stats = function (discord_id, user) {
-//
-//}
+exports.GetUserStats = function() {
+    
+}
