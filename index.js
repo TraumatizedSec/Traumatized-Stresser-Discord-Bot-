@@ -29,6 +29,10 @@ client.on('message', async (message) => {
 
   if(crud.isRegistered(config.CurrentUser.Discord_id)) {
 
+  } else if(message.content == config.BotInfo.prefix + "register") {
+    //REGISTER FUNCTION HERE
+  } else {
+    message.channel.send("Error, you aren't registered to use this bot. In order to register type ``" + config.prefix + "register``!!")
   }
 
 });
