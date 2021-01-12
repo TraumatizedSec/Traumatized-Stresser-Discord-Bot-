@@ -7,7 +7,7 @@ exports.user = function(discord_id, type) {
     /*
     Stat Type Validation Check
     */
-    let stat_types = [ "level", "maxtime", "admin", "all"];
+    let stat_types = [ "level", "maxtime", "admin", "all" ];
     if(!stat_types.includes(type)) {
         return "Error, Invalid stat type!";
     }
@@ -36,4 +36,6 @@ exports.user = function(discord_id, type) {
             db_admin = info[5]
         }
     })
+
+    
 }
