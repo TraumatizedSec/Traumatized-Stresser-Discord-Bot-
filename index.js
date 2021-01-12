@@ -31,11 +31,14 @@ client.on('message', async (message) => {
   }
 
   if(crud.isRegistered(config.BotInfo.Discord_id)) {
+    //YOU CANT START MAKING COMMANDS HERE
+    if(message.content.startsWith(config.BotInfo.Prefix + "help")) { //FIRST COMMAND!
 
+    }
   } else if(message.content.startsWith(config.BotInfo.Prefix + "register")) {
 
   } else if(message.channel.startsWith(config.BotInfo.Prefix)) {
-    message.channel.send("lulz");
+    message.channel.send("Error, You aren't registered ");
   }
 });
 
