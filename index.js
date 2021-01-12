@@ -13,29 +13,30 @@ client.on('ready', () => {
 //Command handler
 
 client.on('message', async (message) => {
-  if (message.author.bot) return;
-  if (message.content.startsWith(config.prefix)) {
+
+  config.CurrentUser.Discord_id = message.author.id;
+
+  if(message.author.bot) return;
+  if(message.content.startsWith(config.BotInfo.Prefix)) {
     let split = message.content.split(" ");
     let i = 0;
     split.forEach(e => {
       config.CurrentMSG.arg[i] = e;
       i++;
     })
-    config.CurrentMSG.Cmd = config.CurrentMSG.arg[0].replace(config.BotInfo.Prefix);
+    config.CurrentMSG.Cmd = config.CurrentMSG.arg[0].replace(config.BotInfo.Prefix, "");
     //LOG COMMAND
   } else {
     //LOG MESSAGE
   }
 
-  if(crud.isRegistered(config.CurrentUser.Discord_id)) {
-    if(config.CurrentMSG.Cmd == "")
+  if(crud.isRegistered(config.BotInfo.Discord_id)) {
 
-  } else if(message.content == config.BotInfo.prefix + "register") {
-    //REGISTER FUNCTION HERE
-  } else {
-    message.channel.send("Error, you aren't registered to use this bot. In order to register type ``" + config.prefix + "register``!!")
+  } else if(message.content.startsWith(config.BotInfo.Prefix + "register")) {
+
+  } else if(message.channel.startsWith(config.BotInfo.Prefix)) {
+    message.channel.send("lulz");
   }
-
 });
 
 
