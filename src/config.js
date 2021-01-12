@@ -18,3 +18,7 @@ exports.CurrentMSG = {
     "fullmsg": "",
     "arg": []
 }
+
+//exports.get_user_stats = function (discord_id, user) {
+//
+//}
