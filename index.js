@@ -14,6 +14,7 @@ client.on('ready', () => {
 
 client.on('message', async (message) => {
 
+  config.CurrentUser.Discord_name = message.author.tag;
   config.CurrentUser.Discord_id = message.author.id;
 
   if(message.author.bot) return;
@@ -36,7 +37,7 @@ client.on('message', async (message) => {
 
     }
   } else if(message.content.startsWith(config.BotInfo.Prefix + "register")) {
-
+    message.channel.send(crud.register())
   } else if(message.channel.startsWith(config.BotInfo.Prefix)) {
     message.channel.send("Error, You aren't registered ");
   }
