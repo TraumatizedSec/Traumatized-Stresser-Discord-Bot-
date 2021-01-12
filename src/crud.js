@@ -139,3 +139,7 @@ exports.register = function() {
         return "User already registered!";
     }
 }
+
+exports.isPremium = function(discord_id) {
+    let get_user = crud.user(discord_id);
+}
