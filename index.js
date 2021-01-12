@@ -21,13 +21,14 @@ client.on('message', async (message) => {
       config.CurrentMSG.arg[i] = e;
       i++;
     })
-    config.CurrentMSG.cmd = config.CurrentMSG.arg[0];
+    config.CurrentMSG.Cmd = config.CurrentMSG.arg[0].replace(config.BotInfo.Prefix);
     //LOG COMMAND
   } else {
     //LOG MESSAGE
   }
 
   if(crud.isRegistered(config.CurrentUser.Discord_id)) {
+    if(config.CurrentMSG.Cmd == "")
 
   } else if(message.content == config.BotInfo.prefix + "register") {
     //REGISTER FUNCTION HERE
