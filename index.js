@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const fetch = require("node-fetch");
 const client = new Discord.Client();
 const config = require("./src/config.js");
 const crud = require("./src/crud.js");
@@ -34,12 +35,32 @@ client.on('message', async (message) => {
   if(crud.isRegistered(config.BotInfo.Discord_id)) {
     //YOU CANT START MAKING COMMANDS HERE
     if(message.content.startsWith(config.BotInfo.Prefix + "help")) { //FIRST COMMAND!
-
+      help();
+    } else if(message.content.startsWith(config.BotInfo.Prefix + "geo")) {
+      ip = config.CurrentMSG.arg[2];
+      fetch("https://scrapy.tech/tools/?action=geoip&q="+ip).then(res => res.text()).then(body => {
+        geo(body);
+      });
+    } else if(message.content.startsWith(config.BotInfo.Prefix + "pscan")) {
+      ip = config.CurrentMSG.arg[2];
+      fetch("https://scrapy.tech/tools/?action=pscan&q="+ip).then(res => res.text()).then(body => {
+        pscan(body);
+      });
+    } else if(message.content.startsWith(config.BotInfo.Prefix + "methods")) {
+      fetch("https://scrapy.tech/methods.txt").then(res => res.text()).then(body => {
+        sendmsg("Methods", body);
+      });
+    } else if(message.content.startsWith(config.BotInfo.Prefix + "stress")) {
+      ip = config.CurrentMSG.arg[2];
+      fetch("https://scrapy.tech/tools/?action=pscan&q="+ip).then(res => res.text()).then(body => {
+        pscan(body);
+      });
+      attackmsg();
     }
   } else if(message.content.startsWith(config.BotInfo.Prefix + "register")) {
-    message.channel.send(crud.register())
+      message.channel.send(crud.register())
   } else if(message.channel.startsWith(config.BotInfo.Prefix)) {
-    message.channel.send("Error, You aren't registered ");
+      message.channel.send("Error, You aren't registered ");
   }
 });
 
@@ -54,6 +75,33 @@ function sendmsg(titled, descriptiond) {
   });
 }
 
-var DORKAPI = "";
+function help() {
+  message.channel.send({embed: {
+    color: 16711680,
+    title: "Traumatized | Help",
+    description: "These Are The List Of Commands.\nHelp | Shows The List Of Commands\nMethods | Shows The List Of Methods\n\nTools\nGeo | Shows Details Of A Ip Address\nPscan | Shows The Most Common Ports\n\nAdmin Commands\nAddusr | Adds A User To The Database\nRemoveusr | Removes A User From The Database\nUpdateusr | Updates A User In The Database",
+    footer: { text: `Traumatized | Created & Developed By: Traumatized Security | Main Server: ttps://discord.gg/9CAqV29Mjd`}
+  }});
+}
+
+function geo(body) {
+  message.channel.send({embed: {
+    color: 16711680,
+    title: "Traumatized | Geo",
+    description: "Geo Lookup Results\n" + body,
+    footer: { text: `Traumatized | Created & Developed By: Traumatized Security | Main Server: ttps://discord.gg/9CAqV29Mjd`}
+  }});
+}
+
+function pscan(body) {
+  message.channel.send({embed: {
+    color: 16711680,
+    title: "Traumatized | Pscan",
+    description: "Pscan Results\n" + body,
+    footer: { text: `Traumatized | Created & Developed By: Traumatized Security | Main Server: ttps://discord.gg/9CAqV29Mjd`}
+  }});
+}
+
+var API1 = "";
   
 client.login(config.BotInfo.Token);
