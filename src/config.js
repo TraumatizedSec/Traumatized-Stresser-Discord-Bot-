@@ -4,5 +4,6 @@ exports.current = {
     "username": "",
     "id": "",
     "level": "",
+    "maxtime": "",
     "args": []
 }
