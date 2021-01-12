@@ -6,5 +6,15 @@ exports.current = {
     "level": "",
     "maxtime": "",
     "admin": "",
-    "args": []
+    "arg": []
+}
+
+exports.CurrentUser = {
+    "user": "",
+    "arg": []
+}
+
+exports.CurrentMSG = {
+    "fullmsg": "",
+    "arg": []
 }
