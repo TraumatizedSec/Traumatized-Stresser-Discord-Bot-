@@ -1,4 +1,5 @@
 const fs = require("fs");
+const crud = require("./crud.js");
 
 exports.user = function(discord_id, type) {
     /*
@@ -12,7 +13,6 @@ exports.user = function(discord_id, type) {
     /*
     Read Db and Check for user stats
     */
-
     let found_check = false;
     let db_user = "";
     let db_level = "";
@@ -53,5 +53,62 @@ exports.user = function(discord_id, type) {
 }
 
 exports.update = function(discord_id, type, new_stat) {
+    /*
+    Stat Type Validation Check
+    */
+   let stat_types = [ "level", "maxtime", "admin" ];
+   if(!stat_types.includes(type)) {
+       return "Error, Invalid stat type!";
+   }
 
+   /*
+   Read Db and Check for user stats
+   */
+   let found_check = false;
+   let db_user = "";
+   let db_level = "";
+   let db_maxtime = "";
+   let db_admin = "";
+
+   let get_user = crud.user(discord_id, "all");
+   let split_info = get_user.split(",");
+   db_user = split_info[0];
+   db_level = split_info[2];
+   db_maxtime = split_info[3];
+   db_admin = split_info[4]
+
+   if(found_check == false) {
+       return "No user found";
+   } else {
+       switch(type) {
+           case stat_types[0]:
+               fs.appendFileSync("../db/users.db", "('" + db_user + "','" + discord_id + "','" + new_stat + "','" + db_maxtime + "','" + db_admin + "')\n");
+               return "Added";
+           case stat_types[1]:
+                fs.appendFileSync("../db/users.db", "('" + db_user + "','" + discord_id + "','" + db_level + "','" + new_stat + "','" + db_admin + "')\n");
+                return "Added";
+           case stat_types[2]:
+                fs.appendFileSync("../db/users.db", "('" + db_user + "','" + discord_id + "','" + db_level + "','" + db_maxtime + "','" + new_stat + "')\n");
+                return "Added";
+       }
+   }
+}
+
+exports.remove = function(discord_id) {
+    let data = fs.readFileSync("../db/users.db", "utf8");
+    let users = data.split("\n");
+    let new_db = "";
+    users.forEach(u => {
+        if(u.includes(discord_id)) {
+            
+        } else {
+            new_db += u + "\n";
+        }
+    })
+
+    if(new_db) {
+        return "User removed";
+    } else {
+        return "Unable to remove user";
+    }
 }
