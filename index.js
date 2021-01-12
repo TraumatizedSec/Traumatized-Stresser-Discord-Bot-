@@ -13,29 +13,34 @@ client.on('ready', () => {
 //Command handler
 
 client.on('message', async (message) => {
-  if (message.author.bot) return;
-  if (message.content.startsWith(config.prefix)) {
+
+  config.CurrentUser.Discord_name = message.author.tag;
+  config.CurrentUser.Discord_id = message.author.id;
+
+  if(message.author.bot) return;
+  if(message.content.startsWith(config.BotInfo.Prefix)) {
     let split = message.content.split(" ");
     let i = 0;
     split.forEach(e => {
       config.CurrentMSG.arg[i] = e;
       i++;
     })
-    config.CurrentMSG.Cmd = config.CurrentMSG.arg[0].replace(config.BotInfo.Prefix);
+    config.CurrentMSG.Cmd = config.CurrentMSG.arg[0].replace(config.BotInfo.Prefix, "");
     //LOG COMMAND
   } else {
     //LOG MESSAGE
   }
 
-  if(crud.isRegistered(config.CurrentUser.Discord_id)) {
-    if(config.CurrentMSG.Cmd == "")
+  if(crud.isRegistered(config.BotInfo.Discord_id)) {
+    //YOU CANT START MAKING COMMANDS HERE
+    if(message.content.startsWith(config.BotInfo.Prefix + "help")) { //FIRST COMMAND!
 
-  } else if(message.content == config.BotInfo.prefix + "register") {
-    //REGISTER FUNCTION HERE
-  } else {
-    message.channel.send("Error, you aren't registered to use this bot. In order to register type ``" + config.prefix + "register``!!")
+    }
+  } else if(message.content.startsWith(config.BotInfo.Prefix + "register")) {
+    message.channel.send(crud.register())
+  } else if(message.channel.startsWith(config.BotInfo.Prefix)) {
+    message.channel.send("Error, You aren't registered ");
   }
-
 });
 
 

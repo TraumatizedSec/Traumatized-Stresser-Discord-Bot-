@@ -19,7 +19,7 @@ exports.user = function(discord_id, type) {
     let db_maxtime = "";
     let db_admin = "";
 
-    let data = fs.readFileSync("../db/users.db", "utf8");
+    let data = fs.readFileSync("./db/users.db", "utf8");
     let fix = data.split("('").join("");
     let fix2 = fix.split("')").join("");
     let fix3 = fix2.split("','").join(",");
@@ -83,23 +83,23 @@ exports.update = function(discord_id, type, new_stat) {
    } else {
        switch(type) {
            case stat_types[0]:
-               fs.appendFileSync("../db/users.db", "('" + db_user + "','" + discord_id + "','" + new_stat + "','" + db_maxtime + "','" + db_admin + "')");
-               fs.appendFileSync("../db/users.db", "\n");
+               fs.appendFileSync("./db/users.db", "('" + db_user + "','" + discord_id + "','" + new_stat + "','" + db_maxtime + "','" + db_admin + "')");
+               fs.appendFileSync("./db/users.db", "\n");
                return "Added";
            case stat_types[1]:
-                fs.appendFileSync("../db/users.db", "('" + db_user + "','" + discord_id + "','" + db_level + "','" + new_stat + "','" + db_admin + "')");
-                fs.appendFileSync("../db/users.db", "\n");
+                fs.appendFileSync("./db/users.db", "('" + db_user + "','" + discord_id + "','" + db_level + "','" + new_stat + "','" + db_admin + "')");
+                fs.appendFileSync("./db/users.db", "\n");
                 return "Added";
            case stat_types[2]:
-                fs.appendFileSync("../db/users.db", "('" + db_user + "','" + discord_id + "','" + db_level + "','" + db_maxtime + "','" + new_stat + "')");
-                fs.appendFileSync("../db/users.db", "\n");
+                fs.appendFileSync("./db/users.db", "('" + db_user + "','" + discord_id + "','" + db_level + "','" + db_maxtime + "','" + new_stat + "')");
+                fs.appendFileSync("./db/users.db", "\n");
                 return "Added";
        }
    }
 }
 
 exports.remove = function(discord_id) {
-    let data = fs.readFileSync("../db/users.db", "utf8");
+    let data = fs.readFileSync("./db/users.db", "utf8");
     let users = data.split("\n");
     let new_db = "";
     users.forEach(u => {
@@ -110,7 +110,7 @@ exports.remove = function(discord_id) {
         }
     })
 
-    fs.writeFileSync("../db/users.db", new_db);
+    fs.writeFileSync("./db/users.db", new_db);
 
     if(new_db) {
         return "User removed";
@@ -130,10 +130,10 @@ exports.isRegistered = function(discord_id) {
     }
 }
 
-exports.register = function(discord_name, discord_id) {
+exports.register = function() {
     let get_user = crud.user(discord_id, "all");
     if(get_user == "Error, Invalid stat type!" || get_user == "No user found!") {
-        fs.appendFileSync("../db/users.db", "('" + discord_name + "','" + discord_id + "','0',',0','0')\n");
+        fs.appendFileSync("./db/users.db", "('" + discord_name + "','" + discord_id + "','0',',0','0')\n");
         return "User registered!";
     } else {
         return "User already registered!";
