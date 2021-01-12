@@ -17,5 +17,6 @@ client.on('message', async (message) => {
     const command = args.shift().toLowerCase();
   });
 
+var DORKAPI = "";
   
 client.login('VERY-SECRET-TOKEN');
