@@ -1,4 +1,6 @@
 const fs = require("fs");
+const config = require("./config.js");
+const crud = require("./crud.js");
 
 exports.BotInfo = {
     "Prefix": ">",
@@ -32,6 +34,10 @@ exports.CurrentServer = {
     "Channel_id": "",
 }
 
-exports.GetUserStats = function() {
-
+exports.GetUserStats = function(discord_id) {
+    let get_info = crud.user(discord_id, "all");
+    let info = get_info.split(",");
+    config.CurrentUser.Level = info[2];
+    config.CurrentUser.Maxtime = info[3];
+    config.CurrentUser.Admin = info[4];
 }
