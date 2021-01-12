@@ -8,7 +8,7 @@ exports.BotInfo = {
     "Bot_Invite": "",
     "Server_Invite": "",
     "Creators": "GDKScrapy, draco",
-    "Token": "Nzk1MDA2MTgyMjEyNzYzNjky.X_DFNA.8tUpgg6ib6vKM3wyzyPsgbowU2Y"
+    "Token": "Nzk1MDA2MTgyMjEyNzYzNjky.X_DFNA.JnWqP1EXKTLpJzPIsuIeyqihKFU"
 }
 
 exports.CurrentMSG = {
