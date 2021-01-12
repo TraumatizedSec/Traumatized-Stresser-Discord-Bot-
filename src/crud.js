@@ -131,5 +131,11 @@ exports.isRegistered = function(discord_id) {
 }
 
 exports.register = function(discord_name, discord_id) {
-
+    let get_user = crud.user(discord_id, "all");
+    if(get_user == "Error, Invalid stat type!" || get_user == "No user found!") {
+        fs.appendFileSync("../db/users.db", "('" + discord_name + "','" + discord_id + "','0',',0','0')\n");
+        return "User registered!";
+    } else {
+        return "User already registered!";
+    }
 }
