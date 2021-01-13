@@ -38,23 +38,6 @@ client.on('message', async (message) => {
     //LOG MESSAGE
   }
 
-  if(message.content.startsWith(config.BotInfo.Prefix + "whip")) {
-    let split = message.content.split(" ");
-    let delamount = split[1]; //450
-    if(split[1] >= "100" || split[1] >= 100) {
-      while(delamount > 100) {
-        console.log("MORE THAN 100");
-        message.channel.bulkDelete(100);
-        delamount-=100;
-      }
-      if(delamount > 0 && delamount < 100) {
-        console.log("LESS THAN 100")
-        message.channel.bulkDelete(delamount);
-      }
-    }
-  }
-
-
   if(crud.isRegistered(config.CurrentUser.Discord_id)) {
     //YOU CANT START MAKING COMMANDS HERE
     if(message.content.startsWith(config.BotInfo.Prefix + "help")) { //FIRST COMMAND!
