@@ -13,6 +13,15 @@ exports.BotInfo = {
     "Token": "Nzk4NjUzNTUzNzk5MjAwNzk4.X_4KFQ.60TZ3sD-hN6pKjNS7j7L2_7XL2U"
 }
 
+exports.Creator = {
+    "Name": "Scrapy",
+    "Discord": "GDK Scrapy#9431",
+    "Instagram": "GDKScrapy",
+    "Twitter": "GDKScrapy",
+    "Server": "https://scrapy.tech/discord",
+    "Site": "https://scrapy.tech/"
+}
+
 
 exports.CurrentMSG = {
     "Cmd": "",
