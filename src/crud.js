@@ -32,9 +32,8 @@ exports.user = function(discord_id, type) {
             let info = u.split(",")
             db_user = info[0];
             db_level = info[1];
-            db_level = info[2];
-            db_maxtime = info[3];
-            db_admin = info[4];
+            db_maxtime = info[2];
+            db_admin = info[3];
         }
     })
 
@@ -74,9 +73,9 @@ exports.update = function(discord_id, type, new_stat) {
    let get_user = crud.user(discord_id, "all");
    let split_info = get_user.split(",");
    db_user = split_info[0];
-   db_level = split_info[2];
-   db_maxtime = split_info[3];
-   db_admin = split_info[4];
+   db_level = split_info[1];
+   db_maxtime = split_info[2];
+   db_admin = split_info[3];
 
    crud.remove(discord_id);
 
@@ -133,7 +132,7 @@ exports.isRegistered = function(discord_id) {
 }
 
 exports.register = function(discord_name, discord_id) {
-    fs.appendFileSync("./db/users.db", "('" + discord_name + "','" + discord_id + "','0',',0','0')\n");
+    fs.appendFileSync("./db/users.db", "('" + discord_name + "','" + discord_id + "','0','0','0')\n");
     return "User registered!";
 }
 
