@@ -4,7 +4,7 @@ const client = new Discord.Client();
 const config = require("./src/config.js");
 const crud = require("./src/crud.js");
 
-//Bot on ready
+//Bot on ready.
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!\nServer Count: ${client.guilds.size}`);
