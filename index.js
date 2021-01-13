@@ -44,13 +44,18 @@ client.on('message', async (message) => {
       sendmsg("Help", "Help | Shows The List Of Commands\nMethods | Shows The List Of Methods\n\n**Tools**\nGeo | Shows The Details Of An Ip Address\nPscan | Shows The Common Ports\n\n**Admin Commands**\nAddusr | Adds A User To The Database\nRemoveusr | Removes A User From The Database\nUpgradeusr | Upgrades A Users Plan")
     } else if(message.content.startsWith(config.BotInfo.Prefix + "geo")) {
       ip = config.CurrentMSG.arg[1];
-      fetch("https://scrapy.tech/tools/?action=geoip&q="+ip).then(res => res.text()).then(body => {
+      fetch("https://scrapy.tech/tools/?action=geoip&q=" + ip).then(res => res.text()).then(body => {
         sendmsg("Geo", body);
       });
     } else if(message.content.startsWith(config.BotInfo.Prefix + "pscan")) {
       ip = config.CurrentMSG.arg[1];
+<<<<<<< Updated upstream
       fetch("https://scrapy.tech/tools/?action=pscan&q="+ip).then(res => res.text()).then(body => {
         sendmsg("Pscan", body);
+=======
+      fetch("https://scrapy.tech/tools/?action=pscan&q=" + ip).then(res => res.text()).then(body => {
+        sendmsg("Geo", body);
+>>>>>>> Stashed changes
       });
     } else if(message.content.startsWith(config.BotInfo.Prefix + "methods")) {
       fetch("https://scrapy.tech/methods.txt").then(res => res.text()).then(body => {
@@ -64,7 +69,7 @@ client.on('message', async (message) => {
       sendmsg("Credits", "**Traumatized Security Team**\n\n**draco Social Media**\nInstagram | bizivix\nDiscord | draco#3024\n**GDK Scrapy Social Media**\nInstagram | gdkscrapy\nDiscord | GDK Scrapy#9431\n**WhosGotFrost Social Media**\nInstagram | whosgotfrost\nDiscord | WhosGotFrost#8041\n**Lag oh ye Social Media**\nDiscord | Lag oh ye#0001")
     } else if(message.content.startsWith(config.BotInfo.Prefix + "stress")) {
       ip = config.CurrentMSG.arg[1];
-      fetch("https://scrapy.tech/tools/?action=pscan&q="+ip).then(res => res.text()).then(body => {
+      fetch("https://scrapy.tech/tools/?action=pscan&q=" + ip).then(res => res.text()).then(body => {
         pscan(body);
       });
     }
