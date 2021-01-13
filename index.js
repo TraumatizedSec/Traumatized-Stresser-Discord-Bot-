@@ -81,9 +81,9 @@ client.on('message', async (message) => {
           pscan(body);
         });
       }
-    } else if(message.content.startsWith(config.BotInfo.Prefix + "addusr")) {
-      if(crud.isAdmin(Discord_id) == true) {
-        user_id = config.CurrentMSG.arg[1]
+    } else if(message.content.startsWith(config.BotInfo.Prefix + "removeusr")) {
+      user_id = config.CurrentMSG.arg[1]
+      if(crud.isAdmin(message.author.id) == true) {
         message.channel.send(crud.remove(user_id))
       } else {
         sendmsg("Admin", "You must be a admin to use this command!")
