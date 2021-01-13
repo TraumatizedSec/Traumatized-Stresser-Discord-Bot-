@@ -1,2 +1,7 @@
+<<<<<<< Updated upstream
 https://this_api.com/api.php?key=frwefwe&host=|UDP,TCP,STD
 https://api_2.com/api.php?key=frwefwe&host=|LDAP,NTP,SYN
+=======
+https://this_api.com/api.php?key=skid&host=|UDP,TCP,STD
+https://api_2.com/api.php?key=skid&host=|TCP,UDP
+>>>>>>> Stashed changes
