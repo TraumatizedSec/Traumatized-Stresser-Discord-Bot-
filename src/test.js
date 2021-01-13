@@ -9,4 +9,4 @@ THIS SCRIPT IS TO TEST FUNCTION IN THIS PROJECT!
 // console.log(crud.user(process.argv[2], process.argv[3])) //GET USER STATS (SCRIPT USAGE SCRIPT.JS <DISCORD_ID> <STAT_TYPE>)
 // console.log(crud.remove(process.argv[2])) //REMOVES USER (SCRIPT USAGE SCRIPT.JS <DISCORD_ID>)
 
-console.log()
+console.log(boot_management.get_apis())
