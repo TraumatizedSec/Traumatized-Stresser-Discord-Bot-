@@ -42,7 +42,8 @@ client.on('message', async (message) => {
   if(crud.isRegistered(config.CurrentUser.Discord_id)) {
     //YOU CANT START MAKING COMMANDS HERE
     if(message.content.startsWith(config.BotInfo.Prefix + "help")) { //FIRST COMMAND!
-      sendmsg("Help", "Help | Shows The List Of Commands\nMethods | Shows The List Of Methods\nCredits | Shows The Creators\n\n**Tools**\nGeo | Shows The Details Of An Ip Address\nPscan | Shows The Common Ports\n\n**Admin Commands**\nAddusr | Adds A User To The Database\nRemoveusr | Removes A User From The Database\nUpgradeusr | Upgrades A Users Plan")
+      // sendmsg("Help", "Help | Shows The List Of Commands\nMethods | Shows The List Of Methods\nCredits | Shows The Creators\n\n**Tools**\nGeo | Shows The Details Of An Ip Address\nPscan | Shows The Common Ports\n\n**Admin Commands**\nAddusr | Adds A User To The Database\nRemoveusr | Removes A User From The Database\nUpgradeusr | Upgrades A Users Plan")
+      help();
     } else if(message.content.startsWith(config.BotInfo.Prefix + "geo")) {
       ip = config.CurrentMSG.arg[1];
       if(message.content.split(" ").length < 1) {
@@ -72,8 +73,6 @@ client.on('message', async (message) => {
       });
     } else if(message.content.startsWith(config.BotInfo.Prefix + "credits")) {
       sendmsg("Credits", "**Traumatized Security Team**\n\n**draco Social Media**\nInstagram | bizivix\nDiscord | draco#3024\n**GDK Scrapy Social Media**\nInstagram | gdkscrapy\nDiscord | GDK Scrapy#9431\n**WhosGotFrost Social Media**\nInstagram | whosgotfrost\nDiscord | WhosGotFrost#8041\n**Lag oh ye Social Media**\nDiscord | Lag oh ye#0001")
-    } else if(message.content.startsWith(config.BotInfo.Prefix + "test")) {
-      test();
     } else if(message.content.startsWith(config.BotInfo.Prefix + "stress")) {
       ip = config.CurrentMSG.arg[1];
       if(message.content.split(" ").length < 1) {
@@ -107,57 +106,28 @@ client.on('message', async (message) => {
     }});
   }
 
-  function test() {
-    const exampleEmbed = {
-      color: 0x0099ff,
-      title: 'Some title',
-      url: 'https://discord.js.org',
-      author: {
-        name: 'Some name',
-        icon_url: 'https://i.imgur.com/wSTFkRM.png',
-        url: 'https://discord.js.org',
-      },
-      description: 'Some description here',
-      thumbnail: {
-        url: 'https://i.imgur.com/wSTFkRM.png',
-      },
-      fields: [
-        {
-          name: 'Regular field title',
-          value: 'Some value here',
-        },
-        {
-          name: '\u200b',
-          value: '\u200b',
-          inline: false,
-        },
-        {
-          name: 'Inline field title',
-          value: 'Some value here',
-          inline: true,
-        },
-        {
-          name: 'Inline field title',
-          value: 'Some value here',
-          inline: true,
-        },
-        {
-          name: 'Inline field title',
-          value: 'Some value here',
-          inline: true,
-        },
-      ],
-      image: {
-        url: 'https://i.imgur.com/wSTFkRM.png',
-      },
-      timestamp: new Date(),
-      footer: {
-        text: 'Some footer text here',
-        icon_url: 'https://i.imgur.com/wSTFkRM.png',
-      },
-    };
-    
-    channel.send({ embed: exampleEmbed });
+  function help() 
+  {
+    const exampleEmbed = new Discord.MessageEmbed()
+      .setColor('#ff0000')
+      .setTitle(config.BotInfo.Name + " | List of commands")
+      .setDescription('Format: \n - Command/Info\n - Command Usage')
+      .addFields(
+        { name: 'Info | BOT Info', value: config.BotInfo.Prefix + 'info' },
+		  //{ name: '\u200B', value: '\u200B' },
+        { name: 'Help | Command list', value: config.BotInfo.Prefix + 'help'},
+	    	{ name: 'GeoIP | IP Location', value: config.BotInfo.Prefix + 'geo <emthod(all/isp)> <ip>'},
+	    	{ name: 'Port Scan | Grab open ports on a IP', value: config.BotInfo.Prefix + 'pscan <ip>'},
+	    	{ name: 'Prices | Bot plans and link to buy now!', value: config.BotInfo.Prefix + 'prices'},
+	    	{ name: 'Methods | List of methods for premium users', value: config.BotInfo.Prefix + 'methods'},
+	    	{ name: 'Bot Invite | Invite this bot to your server', value: config.BotInfo.Prefix + 'bot_inv'},
+	    	{ name: "Traumatized's Server | Traumatized's Personal Server Invite", value: config.BotInfo.Prefix + 'myinvite'},
+	    	{ name: "About | Credits and contact info", value: config.BotInfo.Prefix + 'credits'},
+	    	{ name: '\u200B', value: '\u200B' },
+	    	{ name: 'Admin | List of admin commands', value: config.BotInfo.Prefix + 'admincp'})
+	    .setFooter(config.BotInfo.Name + ` | Created & Developed By: ` + config.Creator.Name + ` | Main Server: https://depatched.ga/join`,'');
+
+        message.channel.send(exampleEmbed);
   }
 });
 
