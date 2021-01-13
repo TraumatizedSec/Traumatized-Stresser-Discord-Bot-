@@ -1,5 +1,9 @@
 var crud = require("./crud.js");
+<<<<<<< Updated upstream
 const boot_management = require("./boot_management.js");
+=======
+var boot_management = require("./boot_management.js");
+>>>>>>> Stashed changes
 
 /*
 THIS SCRIPT IS TO TEST FUNCTION IN THIS PROJECT!
