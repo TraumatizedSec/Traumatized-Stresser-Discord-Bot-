@@ -97,13 +97,13 @@ client.on('message', async (message) => {
       //message.channel.send("Error, You aren't registered ");
   }
 
-  function sendmsg(titled, descriptiond) {
-    message.channel.send({embed: {
-        color: 16711680,
-        title: config.BotInfo.Name + " | "  + titled,
-        description: descriptiond,
-        footer: { text: `Traumatized | Created & Developed By: Traumatized Security | Main Server: ttps://discord.gg/9CAqV29Mjd`}
-    }});
+  function sendmsg(titlel, descriptionl) {
+    const embed = new Discord.MessageEmbed()
+        embed.setColor(16711680)
+        embed.setTitle(config.BotInfo.Name + " | " + titlel)
+        embed.setDescription(descriptionl)
+        embed.setFooter('Traumatized | Created & Developed By: Traumatized Security | Main Server: ttps://discord.gg/9CAqV29Mjd')
+    message.channel.send(embed)
   }
 
   function help() 
