@@ -39,7 +39,6 @@ client.on('message', async (message) => {
     //LOG MESSAGE
   }
 
-
   if(crud.isRegistered(config.CurrentUser.Discord_id)) {
     //YOU CANT START MAKING COMMANDS HERE
     if(message.content.startsWith(config.BotInfo.Prefix + "help")) { //FIRST COMMAND!
