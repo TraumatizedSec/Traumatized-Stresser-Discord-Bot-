@@ -77,15 +77,11 @@ client.on('message', async (message) => {
   function sendmsg(titled, descriptiond) {
     message.channel.send({embed: {
         color: 16711680,
-        title: "Traumatized | "  + titled,
+        title: config.BotInfo.name + " | "  + titled,
         description: descriptiond,
         footer: { text: `Traumatized | Created & Developed By: Traumatized Security | Main Server: ttps://discord.gg/9CAqV29Mjd`}
     }});
   }
 });
 
-
-
-var API1 = "";
-  
 client.login(config.BotInfo.Token);
