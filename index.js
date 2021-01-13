@@ -42,7 +42,7 @@ client.on('message', async (message) => {
   if(crud.isRegistered(config.CurrentUser.Discord_id)) {
     //YOU CANT START MAKING COMMANDS HERE
     if(message.content.startsWith(config.BotInfo.Prefix + "help")) { //FIRST COMMAND!
-      sendmsg("Help", "Help | Shows The List Of Commands\nMethods | Shows The List Of Methods\nCredits | Shows The Creators\n**Tools**\nGeo | Shows The Details Of An Ip Address\nPscan | Shows The Common Ports\n\n**Admin Commands**\nAddusr | Adds A User To The Database\nRemoveusr | Removes A User From The Database\nUpgradeusr | Upgrades A Users Plan")
+      sendmsg("Help", "Help | Shows The List Of Commands\nMethods | Shows The List Of Methods\nCredits | Shows The Creators\n\n**Tools**\nGeo | Shows The Details Of An Ip Address\nPscan | Shows The Common Ports\n\n**Admin Commands**\nAddusr | Adds A User To The Database\nRemoveusr | Removes A User From The Database\nUpgradeusr | Upgrades A Users Plan")
     } else if(message.content.startsWith(config.BotInfo.Prefix + "geo")) {
       ip = config.CurrentMSG.arg[1];
       if(message.content.split(" ") < 1) {
@@ -80,6 +80,13 @@ client.on('message', async (message) => {
         fetch("https://scrapy.tech/tools/?action=pscan&q=" + ip).then(res => res.text()).then(body => {
           pscan(body);
         });
+      }
+    } else if(message.content.startsWith(config.BotInfo.Prefix + "addusr")) {
+      if(crud.isAdmin(Discord_id) == true) {
+        user_id = config.CurrentMSG.arg[1]
+        message.channel.send(crud.remove(user_id))
+      } else {
+        sendmsg("Admin", "You must be a admin to use this command!")
       }
     }
   } else if(message.content.startsWith(config.BotInfo.Prefix + "register")) {
