@@ -116,7 +116,7 @@ client.on('message', async (message) => {
         { name: 'Info | BOT Info', value: config.BotInfo.Prefix + 'info' },
 		  //{ name: '\u200B', value: '\u200B' },
         { name: 'Help | Command list', value: config.BotInfo.Prefix + 'help'},
-	    	{ name: 'GeoIP | IP Location', value: config.BotInfo.Prefix + 'geo <emthod(all/isp)> <ip>'},
+	    	{ name: 'GeoIP | IP Location', value: config.BotInfo.Prefix + 'geo <method(all/isp)> <ip>'},
 	    	{ name: 'Port Scan | Grab open ports on a IP', value: config.BotInfo.Prefix + 'pscan <ip>'},
 	    	{ name: 'Prices | Bot plans and link to buy now!', value: config.BotInfo.Prefix + 'prices'},
 	    	{ name: 'Methods | List of methods for premium users', value: config.BotInfo.Prefix + 'methods'},
