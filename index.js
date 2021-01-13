@@ -8,6 +8,7 @@ const crud = require("./src/crud.js");
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!\nServer Count: ${client.guilds.size}`);
+  client.user.setActivity("Traumatized");
   client.user.setPresence({ game: { name: `the bot is working`, type: 'WATCHING' }, status: 'online' });
 });
 
@@ -42,22 +43,33 @@ client.on('message', async (message) => {
   if(crud.isRegistered(config.CurrentUser.Discord_id)) {
     //YOU CANT START MAKING COMMANDS HERE
     if(message.content.startsWith(config.BotInfo.Prefix + "help")) { //FIRST COMMAND!
-      sendmsg("Help", "Help | Shows The List Of Commands\nMethods | Shows The List Of Methods\n\n**Tools**\nGeo | Shows The Details Of An Ip Address\nPscan | Shows The Common Ports\n\n**Admin Commands**\nAddusr | Adds A User To The Database\nRemoveusr | Removes A User From The Database\nUpgradeusr | Upgrades A Users Plan")
+      sendmsg("Help", "Help | Shows The List Of Commands\nMethods | Shows The List Of Methods\nCredits | Shows The Creators\n**Tools**\nGeo | Shows The Details Of An Ip Address\nPscan | Shows The Common Ports\n\n**Admin Commands**\nAddusr | Adds A User To The Database\nRemoveusr | Removes A User From The Database\nUpgradeusr | Upgrades A Users Plan")
     } else if(message.content.startsWith(config.BotInfo.Prefix + "geo")) {
       ip = config.CurrentMSG.arg[1];
       fetch("https://scrapy.tech/tools/?action=geoip&q=" + ip).then(res => res.text()).then(body => {
-        sendmsg("Geo", body);
+        if(!body) {
+          sendmsg("Error", "HTTP Request Error")
+        } else {
+          sendmsg("Error", "HTTP Request Error")
+          sendmsg("Geo", body);
+        }
       });
     } else if(message.content.startsWith(config.BotInfo.Prefix + "pscan")) {
       ip = config.CurrentMSG.arg[1];
       fetch("https://scrapy.tech/tools/?action=pscan&q="+ip).then(res => res.text()).then(body => {
-        sendmsg("Pscan", body);
+        if(!body) {
+          sendmsg("Error", "HTTP Request Error")
+        } else {
+          sendmsg("Error", "HTTP Request Error")
+          sendmsg("Pscan", body);
+        }
       });
     } else if(message.content.startsWith(config.BotInfo.Prefix + "methods")) {
       fetch("https://scrapy.tech/methods.txt").then(res => res.text()).then(body => {
         if(!body) {
           sendmsg("Error", "Unable to get methods (LIVE)");
         } else {
+          sendmsg("Error", "Unable to get methods (LIVE)");
           sendmsg("Methods", body);
         }
       });
@@ -72,7 +84,8 @@ client.on('message', async (message) => {
   } else if(message.content.startsWith(config.BotInfo.Prefix + "register")) {
       message.channel.send(crud.register(message.author.tag, message.author.id))
   } else if(message.content.startsWith(config.BotInfo.Prefix)) {
-      message.channel.send("Error, You aren't registered ");
+      sendmsg("Error", "You aren't registered")
+      //message.channel.send("Error, You aren't registered ");
   }
 
   function sendmsg(titled, descriptiond) {
