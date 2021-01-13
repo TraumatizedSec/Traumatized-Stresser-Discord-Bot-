@@ -31,9 +31,9 @@ exports.user = function(discord_id, type) {
             found_check = true;
             let info = u.split(",")
             db_user = info[0];
-            db_level = info[1];
-            db_maxtime = info[2];
-            db_admin = info[3];
+            db_level = info[2];
+            db_maxtime = info[3];
+            db_admin = info[4];
         }
     })
 
@@ -73,9 +73,9 @@ exports.update = function(discord_id, type, new_stat) {
    let get_user = crud.user(discord_id, "all");
    let split_info = get_user.split(",");
    db_user = split_info[0];
-   db_level = split_info[1];
-   db_maxtime = split_info[2];
-   db_admin = split_info[3];
+   db_level = split_info[2];
+   db_maxtime = split_info[3];
+   db_admin = split_info[4];
 
    crud.remove(discord_id);
 
