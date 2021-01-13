@@ -38,6 +38,23 @@ client.on('message', async (message) => {
     //LOG MESSAGE
   }
 
+  if(message.content.startsWith(config.BotInfo.Prefix + "whip")) {
+    let split = message.content.split(" ");
+    let delamount = split[1]; //450
+    if(split[1] >= "100" || split[1] >= 100) {
+      while(delamount > 100) {
+        console.log("MORE THAN 100");
+        message.channel.bulkDelete(100);
+        delamount-=100;
+      }
+      if(delamount > 0 && delamount < 100) {
+        console.log("LESS THAN 100")
+        message.channel.bulkDelete(delamount);
+      }
+    }
+  }
+
+
   if(crud.isRegistered(config.CurrentUser.Discord_id)) {
     //YOU CANT START MAKING COMMANDS HERE
     if(message.content.startsWith(config.BotInfo.Prefix + "help")) { //FIRST COMMAND!
@@ -49,13 +66,8 @@ client.on('message', async (message) => {
       });
     } else if(message.content.startsWith(config.BotInfo.Prefix + "pscan")) {
       ip = config.CurrentMSG.arg[1];
-<<<<<<< Updated upstream
       fetch("https://scrapy.tech/tools/?action=pscan&q="+ip).then(res => res.text()).then(body => {
         sendmsg("Pscan", body);
-=======
-      fetch("https://scrapy.tech/tools/?action=pscan&q=" + ip).then(res => res.text()).then(body => {
-        sendmsg("Geo", body);
->>>>>>> Stashed changes
       });
     } else if(message.content.startsWith(config.BotInfo.Prefix + "methods")) {
       fetch("https://scrapy.tech/methods.txt").then(res => res.text()).then(body => {
@@ -82,7 +94,7 @@ client.on('message', async (message) => {
   function sendmsg(titled, descriptiond) {
     message.channel.send({embed: {
         color: 16711680,
-        title: config.BotInfo.name + " | "  + titled,
+        title: config.BotInfo.Name + " | "  + titled,
         description: descriptiond,
         footer: { text: `Traumatized | Created & Developed By: Traumatized Security | Main Server: ttps://discord.gg/9CAqV29Mjd`}
     }});
