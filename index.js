@@ -72,6 +72,8 @@ client.on('message', async (message) => {
       });
     } else if(message.content.startsWith(config.BotInfo.Prefix + "credits")) {
       sendmsg("Credits", "**Traumatized Security Team**\n\n**draco Social Media**\nInstagram | bizivix\nDiscord | draco#3024\n**GDK Scrapy Social Media**\nInstagram | gdkscrapy\nDiscord | GDK Scrapy#9431\n**WhosGotFrost Social Media**\nInstagram | whosgotfrost\nDiscord | WhosGotFrost#8041\n**Lag oh ye Social Media**\nDiscord | Lag oh ye#0001")
+    } else if(message.content.startsWith(config.BotInfo.Prefix + "test")) {
+      test();
     } else if(message.content.startsWith(config.BotInfo.Prefix + "stress")) {
       ip = config.CurrentMSG.arg[1];
       if(message.content.split(" ").length < 1) {
