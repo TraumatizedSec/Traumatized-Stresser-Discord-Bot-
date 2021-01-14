@@ -6,20 +6,35 @@ const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
 
-exports.geo = function(ip) {
-    f("https://scrapy.tech/tools/?action=geoip&q=" + ip).then(res => res.text()).then(body => {
-            if(!body) {
-                console.log("ERROR");
-                return "Unable to get geo!";
-            } else {
-                console.log(body);
-                return body;
-            }
-    }).catch(e => {
-        console.log("[GEO FUNCTION | extra.js] Unable to make web request")
-        return "Unable to connect to geo API!";
-    })
+exports.geo = async ip => {
+    try {
+      const response = await f("https://scrapy.tech/tools/?action=geoip&q=" + ip);
+      const json = await response.text();
+      console.log(json);
+      return json;
+    } catch (error) {
+      console.log(error);
+    }
+};
+
+exports.pscan = async ip => {
+    try {
+        const response = await f("https://scrapy.tech/tools/?action=portscan&q=" + ip);
+        const json = await response.text();
+        console.log(json);
+        return json;
+      } catch (error) {
+        console.log(error);
+      }
 }
+
+exports.test = async function(ip) {
+    const r = await f("https://scrapy.tech/tools/?action=geoip&q=" + ip);
+    const g = r.text().toString();
+    console.log(g);
+    return g;
+}
+
 
 exports.in_between = function(str, first_token, second_token) {
     let split = str.split('');
@@ -42,4 +57,9 @@ exports.in_between = function(str, first_token, second_token) {
 
 exports.removestr = function(str, rm_str) {
     return str.split(rm_str).join("");
+}
+
+exports.currentTime = function() {
+    let current = new Date();
+    return current.getMonth()+1 + "/" + current.getDate() + "/" + current.getFullYear()
 }
