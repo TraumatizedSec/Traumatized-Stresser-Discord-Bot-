@@ -1,4 +1,23 @@
 const fs = require("fs");
+const f = require("node-fetch");
+
+
+const sleep = (milliseconds) => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
+
+exports.geo = function(ip) {
+    f("https://scrapy.tech/tools/?action=geoip&q=" + ip).then(res => res.text()).then(body => {
+            if(!body) {
+                return "Unable to get geo!";
+            } else {
+                return body;
+            }
+    }).catch(e => {
+        console.log("[GEO FUNCTION | extra.js] Unable to make web request")
+        return "Unable to connect to geo API!";
+    })
+}
 
 exports.in_between = function(str, first_token, second_token) {
     let split = str.split('');
