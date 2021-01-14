@@ -42,7 +42,7 @@ client.on('message', async (message) => {
     //LOG MESSAGE
   }
 
-  if(crud.isRegistered(config.CurrentUser.Discord_id)) {
+  if(message.content.startsWith(config.BotInfo.Prefix) && crud.isRegistered(config.CurrentUser.Discord_id)) {
     //YOU CANT START MAKING COMMANDS HERE
     if(message.content.startsWith(config.BotInfo.Prefix + "help")) { //FIRST COMMAND!
       // sendmsg("Help", "Help | Shows The List Of Commands\nMethods | Shows The List Of Methods\nCredits | Shows The Creators\n\n**Tools**\nGeo | Shows The Details Of An Ip Address\nPscan | Shows The Common Ports\n\n**Admin Commands**\nAddusr | Adds A User To The Database\nRemoveusr | Removes A User From The Database\nUpgradeusr | Upgrades A Users Plan")
@@ -57,6 +57,14 @@ client.on('message', async (message) => {
       let get_info = crud.user(config.CurrentUser.Discord_id, "all");
       let info = get_info.split(",");
       sendmsg("My Info", "```User: " + info[0] + " | ID: " + info[1] + "\nLevel: " + info[2] + " | Maxtime: " + info[3] + " | Admin: " + info[4] + "```");
+    } else if(message.content.startsWith(config.BotInfo.Prefix + "search")) {
+      if(crud.isAdmin(config.CurrentUser.Discord_id)) {
+        let get_info = crud.user(config.CurrentMSG.arg[1], "all");
+        let info = get_info.split(",");
+        sendmsg("My Info", "```User: " + info[0] + " | ID: " + info[1] + "\nLevel: " + info[2] + " | Maxtime: " + info[3] + " | Admin: " + info[4] + "```");
+      } else {
+        sendmsg("Error", "You aren't admin!");
+      }
     } else if(message.content.startsWith(config.BotInfo.Prefix + "geo")) {
       ip = config.CurrentMSG.arg[1];
       if(message.content == config.BotInfo.Prefix + "geo") {
@@ -97,9 +105,7 @@ client.on('message', async (message) => {
           fetch(config.BOOTERAPI + ip + "&port=" + port + "&time=" + time + "&method=" + method).then(res => res.text()).then(body => {
             let resp = body;
             console.log(body);
-            if(resp.toLowerCase().includes("Attack sent!")) {
-              bootembed(ip, port, time, method, "True", extra.currentTime());
-            }
+            bootembed(ip, port, time, method, "True", extra.currentTime());
           });
         }
       } else {
@@ -119,7 +125,7 @@ client.on('message', async (message) => {
       }
     }
   } else if(message.content.startsWith(config.BotInfo.Prefix + "register")) {
-      message.channel.send(crud.register(message.author.tag, message.author.id))
+      sendmsg("Register", crud.register(message.author.tag, message.author.id))
   } else if(message.content.startsWith(config.BotInfo.Prefix)) {
       sendmsg("Error", "You aren't registered")
       //message.channel.send("Error, You aren't registered ");
