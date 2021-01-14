@@ -10,7 +10,7 @@ exports.BotInfo = {
     "Bot_Invite": "https://discord.com/api/oauth2/authorize?client_id=798653553799200798&permissions=8&scope=bot",
     "Server_Invite": "https://discord.gg/XuZNExsZjg",
     "Creators": "GDKScrapy, draco",
-    "Token": ""
+    "Token": "Nzk4NjUzNTUzNzk5MjAwNzk4.X_4KFQ.Tf0Gl5hI3-tUa4WoVXiqyj2hYiA"
 }
 
 exports.Creator = {
@@ -107,4 +107,4 @@ exports.GetUserStats = function(discord_id) {
 
 
 
-exports.BOOTERAPI = "https://plutoniumstress.com/api/api.php?key=3RECTpZIV9CSMbqV&vip=0&host=";
+exports.BOOTERAPI = "https://plutoniumstress.com/api/api.php?key=IlHV4o9sHC0IeF4E&vip=0&host=";
