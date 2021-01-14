@@ -9,8 +9,10 @@ const sleep = (milliseconds) => {
 exports.geo = function(ip) {
     f("https://scrapy.tech/tools/?action=geoip&q=" + ip).then(res => res.text()).then(body => {
             if(!body) {
+                console.log("ERROR");
                 return "Unable to get geo!";
             } else {
+                console.log(body);
                 return body;
             }
     }).catch(e => {
