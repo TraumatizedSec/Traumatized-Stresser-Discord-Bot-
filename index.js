@@ -46,7 +46,11 @@ client.on('message', async (message) => {
       // sendmsg("Help", "Help | Shows The List Of Commands\nMethods | Shows The List Of Methods\nCredits | Shows The Creators\n\n**Tools**\nGeo | Shows The Details Of An Ip Address\nPscan | Shows The Common Ports\n\n**Admin Commands**\nAddusr | Adds A User To The Database\nRemoveusr | Removes A User From The Database\nUpgradeusr | Upgrades A Users Plan")
       help();
     } else if(message.content.startsWith(config.BotInfo.Prefix + "test")) {
-      bootembed("1.1.1.1", "80", "30", "LDAP", "Sent", "1/13/21-8:00pm");
+      if(crud.isAdmin(config.CurrentUser.Discord_id)) { 
+        bootembed("1.1.1.1", "80", "30", "LDAP", "Sent", "1/13/21-8:00pm");
+      } else {
+        sendmsg("Error", "Admin only command!");
+      }
     } else if(message.content.startsWith(config.BotInfo.Prefix + "myinfo")) {
       let get_info = crud.user(config.CurrentUser.Discord_id, "all");
       let info = get_info.split(",");
@@ -56,10 +60,7 @@ client.on('message', async (message) => {
       if(message.content == config.BotInfo.Prefix + "geo") {
          sendmsg("Error", "Missing arguments!\nUsage: geo <ip>\nExmaple: geo 5.5.5.5");
       } else {
-        let get_geo = extra.geo(ip);
-        sleep(5000).then(() =>  {
-          sendmsg("Geo", get_geo);
-        }) 
+        sendmsg("Geo", extra.geo(ip));
         // fetch("https://scrapy.tech/tools/?action=geoip&q=" + ip).then(res => res.text()).then(body => {
         //   sendmsg("Geo", body);
         // });
@@ -69,7 +70,7 @@ client.on('message', async (message) => {
       if(message.content.split(" ").length < 1) {
         sendmsg("Error", "Missing arguments\nUsage: " + config.BotInfo.Prefix + "pscan <ip>");
       } else {
-        fetch("https://scrapy.tech/tools/?action=pscan&q="+ip).then(res => res.text()).then(body => {
+        fetch("https://scrapy.tech/tools/?action=pscan&q=" + ip).then(res => res.text()).then(body => {
           sendmsg("Pscan", body);
         });
       }
@@ -78,7 +79,6 @@ client.on('message', async (message) => {
         if(!body) {
           sendmsg("Error", "Unable to get methods (LIVE)");
         } else {
-          sendmsg("Error", "Unable to get methods (LIVE)");
           sendmsg("Methods", body);
         }
       });
@@ -99,9 +99,14 @@ client.on('message', async (message) => {
         });
       }
     } else if(message.content.startsWith(config.BotInfo.Prefix + "removeusr")) {
-      user_id = config.CurrentMSG.arg[1]
+      let tool = config.CurrentMSG.arg[1];
+      let user_id = config.CurrentMSG.arg[2];
+      let stat = config.CurrentMSG.arg[3];
+      let new_str = config.CurrentMSG.arg[4];
       if(crud.isAdmin(message.author.id) == true) {
-        message.channel.send(crud.remove(user_id))
+        if(tool == "update") {
+          sendmsg("User update", crud.update(user_id, stat, new_str));
+        }
       } else {
         sendmsg("Admin", "You must be a admin to use this command!")
       }
