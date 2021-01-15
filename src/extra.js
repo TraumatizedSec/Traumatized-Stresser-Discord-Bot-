@@ -1,38 +1,35 @@
 const fs = require("fs");
 const f = require("node-fetch");
 
+const config = require("./config.js");
+const extra = require("./extra.js");
 
 const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
 
-exports.geo = async ip => {
-    try {
-      const response = await f("https://scrapy.tech/tools/?action=geoip&q=" + ip);
-      const json = await response.text();
-      console.log(json);
-      return json;
-    } catch (error) {
-      console.log(error);
+exports.logger = function(msg_type) { 
+    let logthis = "";
+    switch(msg_type) {
+        case "cmd":
+            logthis = config.Colors.Red;
+            break;
+        case "msg":
+            logthis = config.Colors.Cyan;
+            break;
     }
-};
-
-exports.pscan = async ip => {
-    try {
-        const response = await f("https://scrapy.tech/tools/?action=portscan&q=" + ip);
-        const json = await response.text();
-        console.log(json);
-        return json;
-      } catch (error) {
-        console.log(error);
-      }
+    logthis += "# [ NEW LOG ] #\r\n";
+    logthis += "[MSG/CMD]: " + msg_type + "\r\n";
+    logthis += "[User]: " + config.CurrentUser.Discord_name + " | [User ID]: " + config.CurrentUser.Discord_id + "\r\n";
+    logthis += "[Server]: " + config.CurrentServer.Server_name + " | [Server ID]: " + config.CurrentServer.Server_id + "\r\n";
+    logthis += "[Channel]: " + config.CurrentServer.Channel_name + " | [Channel ID]: " + config.CurrentServer.Channel_id + "\r\n";
+    logthis += "[MSG]: " + config.CurrentMSG.Fullmsg + config.Colors.Reset + "\r\n\r\n";
+    extra.log_file(logthis);
+    console.log(logthis);
 }
 
-exports.test = async function(ip) {
-    const r = await f("https://scrapy.tech/tools/?action=geoip&q=" + ip);
-    const g = r.text().toString();
-    console.log(g);
-    return g;
+exports.log_file = function(data) {
+    fs.appendFileSync("./db/logs.db", data + "\n");
 }
 
 
