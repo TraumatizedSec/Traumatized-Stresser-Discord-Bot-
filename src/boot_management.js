@@ -4,6 +4,11 @@ const config = require("./config");
 const f = require("node-fetch");
 const boot = require("./boot_management");
 
+/*
+THIS HERE WASNT USED BUT WAS THINKING OF A WAY TO MAKE A CONTROL PANEL FOR THIS TO INPUT APIS IN DB AND USE APIS THAT 
+INCLUDE THE METHOD USER IS TRYING TO USE
+*/
+
 exports.get_apis2boot = function(ip, port, time, host) {
     let db = fs.readFileSync("../db/apis.db", "utf8");
     let apis = db.split("\n");
