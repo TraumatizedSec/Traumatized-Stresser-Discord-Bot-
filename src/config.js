@@ -22,6 +22,16 @@ exports.Creator = {
     "Site": "https://scrapy.tech/"
 }
 
+exports.Colors = {
+    "Red": "\x1b[31m",
+    "Blue": "\x1b[34m",
+    "Purple": "\x1b[35m",
+    "Cyan": "\x1b[96m",
+    "Green": "\x1b[32m",
+    "Black": "\x1b[30m",
+    "Reset": "\x1b[39m"
+}
+
 
 exports.CurrentMSG = {
     "Cmd": "",
@@ -107,4 +117,4 @@ exports.GetUserStats = function(discord_id) {
 
 
 
-exports.BOOTERAPI = "https://plutoniumstress.com/api/api.php?key=IlHV4o9sHC0IeF4E&vip=0&host=";
+exports.BOOTERAPI = "http://50.115.166.121/api.php?key=skidfag3&host=";
