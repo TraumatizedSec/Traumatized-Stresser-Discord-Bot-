@@ -146,8 +146,8 @@ exports.isPremium = function(discord_id) {
 }
 
 exports.isAdmin = function(discord_id) {
-    let get_user = crud.user(discord_id, "level")
-    if(get_user == "5") {
+    let get_user = crud.user(discord_id, "admin")
+    if(get_user == "1") {
         return true
     } else {
         return false
