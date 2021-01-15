@@ -138,7 +138,7 @@ exports.register = function(discord_name, discord_id) {
 
 exports.isPremium = function(discord_id) {
     let get_user = crud.user(discord_id, "level");
-    if(get_user == "0") {
+    if(get_user === "0" || get_user === 0 || get_user == "Error, Invalid stat type!" || get_user == "No user found") {
         return false;
     } else {
         return true;
