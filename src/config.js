@@ -10,7 +10,7 @@ exports.BotInfo = {
     "Bot_Invite": "https://discord.com/api/oauth2/authorize?client_id=798653553799200798&permissions=8&scope=bot",
     "Server_Invite": "https://discord.gg/XuZNExsZjg",
     "Creators": "GDKScrapy, draco",
-    "Token": "Nzk4NjUzNTUzNzk5MjAwNzk4.X_4KFQ.Tf0Gl5hI3-tUa4WoVXiqyj2hYiA"
+    "Token": ""
 }
 
 exports.Creator = {
@@ -117,4 +117,4 @@ exports.GetUserStats = function(discord_id) {
 
 
 
-exports.BOOTERAPI = "http://50.115.166.121/api.php?key=skidfag3&host=";
+exports.BOOTERAPI = "";
