@@ -139,8 +139,7 @@ client.on('message', async (message) => {
   } else if(message.content.startsWith(config.BotInfo.Prefix + "register")) {
       sendmsg("Register", crud.register(message.author.tag, message.author.id))
   } else if(message.content.startsWith(config.BotInfo.Prefix)) {
-      sendmsg("Error", "You aren't registered")
-      //message.channel.send("Error, You aren't registered ");
+      sendmsg("Error", "You aren't registered. In order to register type ``" + config.BotInfo.Prefix  + "register``");
   }
 
   function sendmsg(titlel, descriptionl) {
@@ -163,7 +162,8 @@ client.on('message', async (message) => {
 		  //{ name: '\u200B', value: '\u200B' },
         { name: 'Help | Command list', value: config.BotInfo.Prefix + 'help'},
 	    	{ name: 'GeoIP | IP Location', value: config.BotInfo.Prefix + 'geo <method(all/isp)> <ip>'},
-	    	{ name: 'Port Scan | Grab open ports on a IP', value: config.BotInfo.Prefix + 'pscan <ip>'},
+        { name: 'Port Scan | Grab open ports on a IP', value: config.BotInfo.Prefix + 'pscan <ip>'},
+        { name: 'Stress | Traumatized Stresser', value: config.BotInfo.Prefix + 'stress <ip> <port> <time> <method>'},
 	    	{ name: 'Prices | Bot plans and link to buy now!', value: config.BotInfo.Prefix + 'prices'},
 	    	{ name: 'Methods | List of methods for premium users', value: config.BotInfo.Prefix + 'methods'},
 	    	{ name: 'Bot Invite | Invite this bot to your server', value: config.BotInfo.Prefix + 'bot_inv'},
