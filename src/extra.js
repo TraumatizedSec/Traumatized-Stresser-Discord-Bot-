@@ -10,22 +10,22 @@ const sleep = (milliseconds) => {
 
 exports.logger = function(msg_type) { 
     let logthis = "";
-    switch(msg_type) {
-        case "cmd":
-            logthis = config.Colors.Red;
-            break;
-        case "msg":
-            logthis = config.Colors.Cyan;
-            break;
-    }
     logthis += "# [ NEW LOG ] #\r\n";
     logthis += "[MSG/CMD]: " + msg_type + "\r\n";
     logthis += "[User]: " + config.CurrentUser.Discord_name + " | [User ID]: " + config.CurrentUser.Discord_id + "\r\n";
     logthis += "[Server]: " + config.CurrentServer.Server_name + " | [Server ID]: " + config.CurrentServer.Server_id + "\r\n";
     logthis += "[Channel]: " + config.CurrentServer.Channel_name + " | [Channel ID]: " + config.CurrentServer.Channel_id + "\r\n";
-    logthis += "[MSG]: " + config.CurrentMSG.Fullmsg + config.Colors.Reset + "\r\n\r\n";
+    logthis += "[MSG]: " + config.CurrentMSG.Fullmsg + "\r\n\r\n";
     extra.log_file(logthis);
-    console.log(logthis);
+    
+    switch(msg_type) {
+        case "cmd":
+            console.log(config.Colors.Red + logthis + config.Colors.Reset);
+            break;
+        case "msg":
+            console.log(config.Colors.Cyan + logthis + config.Colors.Reset);
+            break;
+    }
 }
 
 exports.log_file = function(data) {
