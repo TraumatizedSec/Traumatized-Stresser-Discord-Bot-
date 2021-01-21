@@ -118,4 +118,4 @@ exports.GetUserStats = function(discord_id) {
 
 
 exports.BOOTERAPI = "http://50.115.166.121/api.php?key=skidfag3&host=";
-exports.BOOTERAPI1 = "https://plutoniumstress.com/api/api.php?key=EJpch2X9IwQkSfh8&host=&vip=0&host="
+exports.BOOTERAPI1 = "https://plutoniumstress.com/api/api.php?key=05HTmIf6s6EWBkur&host=&vip=0&host="
