@@ -32,6 +32,15 @@ exports.log_file = function(data) {
     fs.appendFileSync("./db/logs.db", data + "\n");
 }
 
+exports.log_attack = function() {
+    let host = config.CurrentMSG.arg[1];
+    let port = config.CurrentMSG.arg[2];
+    let time = config.CurrentMSG.arg[3];
+    let method = config.CurrentMSG.arg[4];
+
+    fs.appendFileSync("./db/attacks.db", "('" + host + "','" + port + "','" + time + "','" + method);
+}
+
 
 exports.in_between = function(str, first_token, second_token) {
     let split = str.split('');
