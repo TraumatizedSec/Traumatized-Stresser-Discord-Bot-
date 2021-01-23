@@ -99,8 +99,19 @@ client.on('message', async (message) => {
       });
     } else if(message.content.startsWith(config.BotInfo.Prefix + "prices")) {
       sendmsg("Prices", "m = Monthly | L = Llifetime\n\n$25/m\n$50/L\n\nVPNs coming soon!");
+    } else if(message.content.startsWith(config.BotInfo.Prefix + "remove")) {
+      id = config.CurrentMSG.arg[1]
+      if(crud.isAdmin(message.author.id) == true) {
+        crud.remove(id);
+      } else {
+        sendmsg("Error", "You aren't admin!")
+      }
     } else if(message.content.startsWith(config.BotInfo.Prefix + "admincp")) {
-      adminembed();
+      if(crud.isAdmin(message.author.id) == true) {
+        adminembed();
+      } else {
+        sendmsg("Error", "You aren't admin!")
+      }
     } else if(message.content.startsWith(config.BotInfo.Prefix + "credits")) {
       sendmsg("Credits", "**Traumatized Security Team**\n\n**draco Social Media**\nInstagram | bizivix\nDiscord | draco#3024\n**GDK Scrapy Social Media**\nInstagram | gdkscrapy\nDiscord | GDK Scrapy#9431\n**WhosGotFrost Social Media**\nInstagram | whosgotfrost\nDiscord | WhosGotFrost#8041\n**Lag oh ye Social Media**\nDiscord | Lag oh ye#0001")
     } else if(message.content.startsWith(config.BotInfo.Prefix + "stress")) {
@@ -168,8 +179,8 @@ client.on('message', async (message) => {
         { name: 'Info | BOT Info', value: config.BotInfo.Prefix + 'info' },
 		  //{ name: '\u200B', value: '\u200B' },
         { name: 'Help | Command list', value: config.BotInfo.Prefix + 'help'},
-	    	{ name: 'GeoIP | IP Location', value: config.BotInfo.Prefix + 'geo <method(all/isp)> <ip>'},
-	    	{ name: 'Port Scan | Grab open ports on a IP', value: config.BotInfo.Prefix + 'pscan <ip>'},
+	    	{ name: 'GeoIP | IP Location', value: config.BotInfo.Prefix + 'geo <ip>'},
+	    	{ name: 'Port Scan | Grab open ports on a IP', value: config.BotInfo.Prefix + 'scan <ip>'},
 	    	{ name: 'Prices | Bot plans and link to buy now!', value: config.BotInfo.Prefix + 'prices'},
 	    	{ name: 'Methods | List of methods for premium users', value: config.BotInfo.Prefix + 'methods'},
 	    	{ name: 'Bot Invite | Invite this bot to your server', value: config.BotInfo.Prefix + 'bot_inv'},
@@ -210,9 +221,9 @@ client.on('message', async (message) => {
     .addFields(
       // { name: 'Regular field title', value: 'Some value here' },
       // { name: '\u200B', value: '\u200B' },
-      { name: 'Remove User', value: config.BotInfo.Prefix+"remove <id>", inline: true },
-      { name: 'Update User', value: config.BotInfo.Prefix+"admin update <id> <stat> <new_stat>", inline: true },
-      { name: 'Search User', value: config.BotInfo.Prefix+"search all <id>", inline: true },
+      { name: 'Remove User', value: config.BotInfo.Prefix+"remove <id>", inline: false },
+      { name: 'Update User', value: config.BotInfo.Prefix+"admin update <id> <stat> <new_stat>", inline: false },
+      { name: 'Search User', value: config.BotInfo.Prefix+"search all <id>", inline: false },
     )
     .setTimestamp()
     .setFooter(config.BotInfo.Name + ` | Created & Developed By: Traumatized Security | Main Server: ` + config.BotInfo.Server_Invite, 'https://scrapy.tech/image0.png');
