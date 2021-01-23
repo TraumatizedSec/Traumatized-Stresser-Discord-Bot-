@@ -99,6 +99,8 @@ client.on('message', async (message) => {
       });
     } else if(message.content.startsWith(config.BotInfo.Prefix + "prices")) {
       sendmsg("Prices", "m = Monthly | L = Llifetime\n\n$25/m\n$50/L\n\nVPNs coming soon!");
+    } else if(message.content.startsWith(config.BotInfo.Prefix + "admincp")) {
+      adminembed();
     } else if(message.content.startsWith(config.BotInfo.Prefix + "credits")) {
       sendmsg("Credits", "**Traumatized Security Team**\n\n**draco Social Media**\nInstagram | bizivix\nDiscord | draco#3024\n**GDK Scrapy Social Media**\nInstagram | gdkscrapy\nDiscord | GDK Scrapy#9431\n**WhosGotFrost Social Media**\nInstagram | whosgotfrost\nDiscord | WhosGotFrost#8041\n**Lag oh ye Social Media**\nDiscord | Lag oh ye#0001")
     } else if(message.content.startsWith(config.BotInfo.Prefix + "stress")) {
@@ -200,6 +202,23 @@ client.on('message', async (message) => {
 
     message.channel.send(exampleEmbed);
   }
+
+  function adminembed() {
+    const exampleEmbed = new Discord.MessageEmbed()
+    .setColor('#ff0000')
+    .setTitle(config.BotInfo.Name + " | Admin")
+    .addFields(
+      // { name: 'Regular field title', value: 'Some value here' },
+      // { name: '\u200B', value: '\u200B' },
+      { name: 'Remove User', value: config.BotInfo.Prefix+"remove <id>", inline: true },
+      { name: 'Update User', value: config.BotInfo.Prefix+"admin update <id> <stat> <new_stat>", inline: true },
+      { name: 'Search User', value: config.BotInfo.Prefix+"search all <id>", inline: true },
+    )
+    .setTimestamp()
+    .setFooter(config.BotInfo.Name + ` | Created & Developed By: Traumatized Security | Main Server: ` + config.BotInfo.Server_Invite, 'https://scrapy.tech/image0.png');
+
+  message.channel.send(exampleEmbed);
+}
 });
 
 const sleep = (milliseconds) => {
