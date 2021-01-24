@@ -4724,3 +4724,11 @@ socket.write(await file.autism())
 [MSG]: 
 
 
+# [ NEW LOG ] #
+[MSG/CMD]: msg
+[User]: vSync#0001 | [User ID]: 789584135160987719
+[Server]: cute bot btw | [Server ID]: 802545774843396127
+[Channel]: cute bot btw | [Channel ID]: 802545774843396127
+[MSG]: hi
+
+
