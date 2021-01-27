@@ -14,10 +14,11 @@ exports.BotInfo = {
 }
 
 exports.Creator = {
-    "Name": "Scrapy",
-    "Discord": "GDK Scrapy#9431",
-    "Instagram": "GDKScrapy",
-    "Twitter": "GDKScrapy",
+    "Name": "su",
+    "Discord": "su#9374",
+    "DiscordID": "804028011639996436",
+    "Instagram": "@GDKScrapy",
+    "Twitter": "@GDKScrapy",
     "Server": "https://scrapy.tech/discord",
     "Site": "https://scrapy.tech/"
 }
@@ -118,4 +119,4 @@ exports.GetUserStats = function(discord_id) {
 
 
 exports.BOOTERAPI = "http://50.115.166.121/api.php?key=skidfag3&host=";
-exports.BOOTERAPI1 = "https://plutoniumstress.com/api/api.php?key=PPbhmeRLxeaX9ztz&host=&vip=0&host="
+exports.BOOTERAPI1 = "https://zeus-net.pw/panel/api/?totalservers=1&username=Yazhrod&key=lvgxp6e!cexm8i09p1d77wawh4fh9!abcffyic&host="
