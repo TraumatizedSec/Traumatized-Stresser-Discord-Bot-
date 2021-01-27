@@ -147,9 +147,12 @@ exports.isPremium = function(discord_id) {
 
 exports.isAdmin = function(discord_id) {
     let get_user = crud.user(discord_id, "admin")
-    if(get_user == "1") {
-        return true
+    if(get_user == "1" || get_user == 1) {
+        return true;
+    } else if(get_user == "0" || get_user == 0) {
+        return false;
     } else {
-        return false
+        console.log("Unable to pull admin status");
+        return "Unable to pull admin status";
     }
 }
