@@ -118,7 +118,7 @@ client.on('message', async (message) => {
             //   console.log(body);
             //   bootembed(ip, port, time, method, "True", extra.currentTime());
             // });
-            fetch(config.BOOTERAPI1 + ip + "&port=" + port + "&time=" + time + "&method=" + method).then(res => res.text()).then(body => {
+            fetch(config.BOOTERAPI + ip + "&port=" + port + "&time=" + time + "&method=" + method).then(res => res.text()).then(body => {
               let resp = body;
               console.log(body);
             });
@@ -139,6 +139,8 @@ client.on('message', async (message) => {
       if(crud.isAdmin(message.author.id) == true) {
         if(tool == "update") {
           sendmsg("User update", crud.update(user_id, stat, new_str));
+        } else {
+          sendmsg("Admin Commands", )
         }
       } else {
         sendmsg("Admin", "You must be a admin to use this command!")
@@ -179,6 +181,21 @@ client.on('message', async (message) => {
 	    	{ name: "About | Credits and contact info", value: config.BotInfo.Prefix + 'credits'},
 	    	{ name: '\u200B', value: '\u200B' },
 	    	{ name: 'Admin | List of admin commands', value: config.BotInfo.Prefix + 'admincp'})
+	    .setFooter(config.BotInfo.Name + ` | Created & Developed By: Traumatized Security | Main Server: ` + config.BotInfo.Server_Invite, 'https://scrapy.tech/image0.png');
+
+        message.channel.send(exampleEmbed);
+  }
+
+  function admin_help() 
+  {
+    const exampleEmbed = new Discord.MessageEmbed()
+      .setColor('#ff0000')
+      .setTitle(config.BotInfo.Name + " | List of commands")
+      .setDescription('Format: \n - Command/Info\n - Command Usage')
+      .addFields(
+        { name: 'Help | Command list', value: config.BotInfo.Prefix + 'admin'},
+	    	{ name: 'GeoIP | IP Location', value: config.BotInfo.Prefix + 'geo <method(all/isp)> <ip>'},
+	    	{ name: 'Port Scan | Grab open ports on a IP', value: config.BotInfo.Prefix + 'scan <ip>'}
 	    .setFooter(config.BotInfo.Name + ` | Created & Developed By: Traumatized Security | Main Server: ` + config.BotInfo.Server_Invite, 'https://scrapy.tech/image0.png');
 
         message.channel.send(exampleEmbed);
