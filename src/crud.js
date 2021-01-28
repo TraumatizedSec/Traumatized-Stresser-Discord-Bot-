@@ -1,5 +1,16 @@
 const fs = require("fs");
 
+/*
+                        CRUD DOC
+
+Register                Register(discord_name, discord_id)                  Return Value Function
+GET USER INFO           user(discord_id, type)                              Return Value Function
+Update                  update(discord_id, )
+
+
+
+*/
+
 const config = require("./config.js");
 const crud = require("./crud.js");
 
