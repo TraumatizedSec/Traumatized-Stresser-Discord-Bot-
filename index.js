@@ -111,7 +111,7 @@ client.on('message', async (message) => {
       } else {
         if(crud.isPremium(config.CurrentUser.Discord_id)) {
           if(message.content.split(" ").length < 4) {
-            sendmsg("Error", "Missing arguments\nUsage: " + config.BotInfo.Prefix + "stress <ip> <port> <time>");
+            sendmsg("Error", "Missing arguments\nUsage: " + config.BotInfo.Prefix + "stress <ip> <port> <time> <method>");
           } else {
             // fetch(config.BOOTERAPI + ip + "&port=" + port + "&time=" + time + "&method=" + method).then(res => res.text()).then(body => {
             //   let resp = body;
