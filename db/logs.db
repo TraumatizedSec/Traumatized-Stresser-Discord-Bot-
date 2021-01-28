@@ -8717,3 +8717,19 @@ public:
 [MSG]: >stress 51.77.52.212 53 100 TCPALL
 
 
+# [ NEW LOG ] #
+[MSG/CMD]: cmd
+[User]: su#9374 | [User ID]: 804028011639996436
+[Server]: ★ 𝚃𝚛𝚊𝚞𝚖𝚊𝚝𝚒𝚣𝚎𝚍® ★ | [Server ID]: 795002537865904158
+[Channel]: ★ 𝚃𝚛𝚊𝚞𝚖𝚊𝚝𝚒𝚣𝚎𝚍® ★ | [Channel ID]: 795002537865904158
+[MSG]: >play Skrillex & Alvin Risk - Try It Out (Official Music Video)
+
+
+# [ NEW LOG ] #
+[MSG/CMD]: msg
+[User]: su#9374 | [User ID]: 804028011639996436
+[Server]: ★ 𝚃𝚛𝚊𝚞𝚖𝚊𝚝𝚒𝚣𝚎𝚍® ★ | [Server ID]: 795002537865904158
+[Channel]: ★ 𝚃𝚛𝚊𝚞𝚖𝚊𝚝𝚒𝚣𝚎𝚍® ★ | [Channel ID]: 795002537865904158
+[MSG]: !play Skrillex & Alvin Risk - Try It Out (Official Music Video)
+
+
