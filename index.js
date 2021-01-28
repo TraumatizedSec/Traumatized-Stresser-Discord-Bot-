@@ -121,6 +121,7 @@ client.on('message', async (message) => {
             fetch(config.BOOTERAPI + ip + "&port=" + port + "&time=" + time + "&method=" + method).then(res => res.text()).then(body => {
               let resp = body;
               console.log(body);
+              bootembed(ip, port, time, method, "True", extra.currentTime());
             });
           }
         } else {
@@ -195,7 +196,7 @@ client.on('message', async (message) => {
       .addFields(
         { name: 'Help | Command list', value: config.BotInfo.Prefix + 'admin'},
 	    	{ name: 'GeoIP | IP Location', value: config.BotInfo.Prefix + 'geo <method(all/isp)> <ip>'},
-	    	{ name: 'Port Scan | Grab open ports on a IP', value: config.BotInfo.Prefix + 'scan <ip>'}
+	    	{ name: 'Port Scan | Grab open ports on a IP', value: config.BotInfo.Prefix + 'scan <ip>'})
 	    .setFooter(config.BotInfo.Name + ` | Created & Developed By: Traumatized Security | Main Server: ` + config.BotInfo.Server_Invite, 'https://scrapy.tech/image0.png');
 
         message.channel.send(exampleEmbed);
