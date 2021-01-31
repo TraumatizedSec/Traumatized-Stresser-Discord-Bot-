@@ -118,5 +118,6 @@ exports.GetUserStats = function(discord_id) {
 
 
 
-exports.BOOTERAPI = "https://scrapy.tech/api.php?key=033c3f0f-3adf-443d-a825-04ec28ac0843&target=";
-exports.BOOTERAPI1 = "https://zeus-net.pw/panel/api/?totalservers=1&username=Yazhrod&key=lvgxp6e!cexm8i09p1d77wawh4fh9!abcffyic&host="
+exports.BOOTERAPI = "https://45.143.138.112/api.php?host=";
+exports.BOOTERAPI1 = "https://45.143.138.137/api.php?host=";
+exports.BOOTERAPI2 = "https://zeus-net.pw/panel/api/?totalservers=1&username=Yazhrod&key=lvgxp6e!cexm8i09p1d77wawh4fh9!abcffyic&host="
