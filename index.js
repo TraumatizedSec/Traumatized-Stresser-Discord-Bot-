@@ -121,7 +121,7 @@ client.on('message', async (message) => {
             fetch(config.BOOTERAPI + ip + "&port=" + port + "&time=" + time + "&method=" + method).then(res => res.text()).then(body => {
               let resp = body;
               console.log(body);
-              bootembed(ip, port, time, method, "True", extra.currentTime());
+              // bootembed(ip, port, time, method, "True", extra.currentTime());
             });
           }
         } else {
