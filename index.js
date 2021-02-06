@@ -12,7 +12,7 @@ const { stat } = require('fs');
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!\nServer Count: ${client.guilds.size}`);
-  client.user.setActivity("Traumatized");
+  client.user.setActivity("CodeTheWorld");
   //client.user.setPresence({ game: { name: `the bot is working`, type: 'WATCHING' }, status: 'online' });
 });
 
@@ -100,7 +100,7 @@ client.on('message', async (message) => {
     } else if(message.content.startsWith(config.BotInfo.Prefix + "prices")) {
       sendmsg("Prices", "m = Monthly | L = Llifetime\n\n$25/m\n$50/L\n\nVPNs coming soon!");
     } else if(message.content.startsWith(config.BotInfo.Prefix + "credits")) {
-      sendmsg("Credits", "**Traumatized Security Team**\n\n**draco Social Media**\nInstagram | bizivix\nDiscord | draco#3024\n**GDK Scrapy Social Media**\nInstagram | gdkscrapy\nDiscord | GDK Scrapy#9431\n**WhosGotFrost Social Media**\nInstagram | whosgotfrost\nDiscord | WhosGotFrost#8041\n**Lag oh ye Social Media**\nDiscord | Lag oh ye#0001")
+      sendmsg("Credits", "**CodeTheWorld Inc Team**\n\n**draco Social Media**\nInstagram | bizivix\nDiscord | draco#3024\n**GDK Scrapy Social Media**\nInstagram | gdkscrapy\nDiscord | GDK Scrapy#9431\n**WhosGotFrost Social Media**\nInstagram | whosgotfrost\nDiscord | WhosGotFrost#8041\n**Lag oh ye Social Media**\nDiscord | Lag oh ye#0001")
     } else if(message.content.startsWith(config.BotInfo.Prefix + "stress")) {
       let ip = config.CurrentMSG.arg[1];
       let port = config.CurrentMSG.arg[2];
@@ -158,7 +158,7 @@ client.on('message', async (message) => {
         embed.setColor(16711680)
         embed.setTitle(config.BotInfo.Name + " | " + titlel)
         embed.setDescription(descriptionl)
-        embed.setFooter('Traumatized | Created & Developed By: Traumatized Security | Main Server: ' + config.BotInfo.Server_Invite)
+        embed.setFooter('CodeTheWorld | Created & Developed By: CodeTheWorld Inc | Main Server: ' + config.BotInfo.Server_Invite)
     message.channel.send(embed)
   }
 
@@ -178,11 +178,11 @@ client.on('message', async (message) => {
         { name: 'Methods | List of methods for premium users', value: config.BotInfo.Prefix + 'methods'},
         { name: 'Stress | Stresser', value: config.BotInfo.Prefix + 'stress <ip> <port> <time> <method>'},
 	    	{ name: 'Bot Invite | Invite this bot to your server', value: config.BotInfo.Prefix + 'bot_inv'},
-	    	{ name: "Traumatized's Server | Traumatized's Personal Server Invite", value: config.BotInfo.Prefix + 'server_inv'},
+	    	{ name: "CodeTheWorld's Server | CodeTheWorld's Personal Server Invite", value: config.BotInfo.Prefix + 'server_inv'},
 	    	{ name: "About | Credits and contact info", value: config.BotInfo.Prefix + 'credits'},
 	    	{ name: '\u200B', value: '\u200B' },
 	    	{ name: 'Admin | List of admin commands', value: config.BotInfo.Prefix + 'admincp'})
-	    .setFooter(config.BotInfo.Name + ` | Created & Developed By: Traumatized Security | Main Server: ` + config.BotInfo.Server_Invite, 'https://scrapy.tech/image0.png');
+	    .setFooter(config.BotInfo.Name + ` | Created & Developed By: CodeTheWorld Inc | Main Server: ` + config.BotInfo.Server_Invite, 'https://scrapy.tech/image0.png');
 
         message.channel.send(exampleEmbed);
   }
@@ -197,7 +197,7 @@ client.on('message', async (message) => {
         { name: 'Help | Command list', value: config.BotInfo.Prefix + 'admin'},
 	    	{ name: 'GeoIP | IP Location', value: config.BotInfo.Prefix + 'geo <method(all/isp)> <ip>'},
 	    	{ name: 'Port Scan | Grab open ports on a IP', value: config.BotInfo.Prefix + 'scan <ip>'})
-	    .setFooter(config.BotInfo.Name + ` | Created & Developed By: Traumatized Security | Main Server: ` + config.BotInfo.Server_Invite, 'https://scrapy.tech/image0.png');
+	    .setFooter(config.BotInfo.Name + ` | Created & Developed By: CodeTheWorld Inc | Main Server: ` + config.BotInfo.Server_Invite, 'https://scrapy.tech/image0.png');
 
         message.channel.send(exampleEmbed);
   }
@@ -218,7 +218,7 @@ client.on('message', async (message) => {
     	)
     	.setImage('https://thumbs.gfycat.com/AgileUnrulyAcaciarat-max-1mb.gif')
     	.setTimestamp()
-    	.setFooter(config.BotInfo.Name + ` | Created & Developed By: Traumatized Security | Main Server: ` + config.BotInfo.Server_Invite, 'https://scrapy.tech/image0.png');
+    	.setFooter(config.BotInfo.Name + ` | Created & Developed By: CodeTheWorld Inc | Main Server: ` + config.BotInfo.Server_Invite, 'https://scrapy.tech/image0.png');
 
     message.channel.send(exampleEmbed);
   }
