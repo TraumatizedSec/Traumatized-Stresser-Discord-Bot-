@@ -16996,3 +16996,11 @@ function isValidIP(ip) {
 [MSG]: <@!472107577522782238> rn
 
 
+# [ NEW LOG ] #
+[MSG/CMD]: cmd
+[User]: eZy#9374 | [User ID]: 804028011639996436
+[Server]: Paralyze | [Server ID]: 806792390924697601
+[Channel]: Paralyze | [Channel ID]: 806792390924697601
+[MSG]: >stress 70.70.70.70 80 30 LDAP
+
+
