@@ -17796,3 +17796,19 @@ function isValidIP(ip) {
 [MSG]: >register
 
 
+# [ NEW LOG ] #
+[MSG/CMD]: msg
+[User]: 0x00#1337 | [User ID]: 798996954511179777
+[Server]: CodeTheWorld | [Server ID]: 806792390924697601
+[Channel]: CodeTheWorld | [Channel ID]: 806792390924697601
+[MSG]: ded
+
+
+# [ NEW LOG ] #
+[MSG/CMD]: msg
+[User]: w𝑖fis#8352 | [User ID]: 804553107425460265
+[Server]: CodeTheWorld | [Server ID]: 806792390924697601
+[Channel]: CodeTheWorld | [Channel ID]: 806792390924697601
+[MSG]: 
+
+
