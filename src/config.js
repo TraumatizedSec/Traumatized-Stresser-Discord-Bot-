@@ -4,22 +4,22 @@ const crud = require("./crud.js");
 
 exports.BotInfo = {
     "Prefix": ";",
-    "Name": "CodeTheWorld",
+    "Name": "Pandemic",
     "Description": "In a land with packet launchers!",
     "Version": "1.00",
-    "Bot_Invite": "https://discord.com/api/oauth2/authorize?client_id=807664727383736330&permissions=8&scope=bot",
-    "Server_Invite": "https://discord.gg/FFMBNUdj9V",
-    "Creators": "hawk",
-    "Token": "ODA3NjY0NzI3MzgzNzM2MzMw.YB7SZA.aNXmu8nQC-1xQQpoY9nThwX21_k"
+    "Bot_Invite": "https://discord.com/api/oauth2/authorize?client_id=812086626457092118&permissions=8&scope=bot",
+    "Server_Invite": "https://discord.gg/Mq6aGh2EVj",
+    "Creators": "n4n0 | King Larry",
+    "Token": "ODEyMDg2NjI2NDU3MDkyMTE4.YC7omw.lse8TSfZxEpSRZ7jKR48RsB5PeY"
 }
 
 exports.Creator = {
-    "Name": "eZy",
-    "Discord": "eZy [CTW]#9374",
-    "DiscordID": "804028011639996436",
-    "Instagram": "@Prerooted",
-    "Server": "https://scrapy.tech/discord",
-    "Site": "https://scrapy.tech/"
+    "Name": "n4n0",
+    "Discord": "n4n0#2100",
+    "DiscordID": "806100698135396372",
+    "Instagram": "@Preauthorize",
+    "Server": "https://CodeTheWorld.xyz/discord",
+    "Site": "https://codetheworld.xyz/"
 }
 
 exports.Colors = {
@@ -117,6 +117,4 @@ exports.GetUserStats = function(discord_id) {
 
 
 
-exports.BOOTERAPI = "https://onyxapi.online/AllAPI.php?key=Zerro-1m-34758347&host=";
-exports.BOOTERAPI1 = "https://envystress.me/api/api.php?key=3b7BO0vghpOxEWLQ&host=";
-exports.BOOTERAPI2 = "https://zeus-net.pw/panel/api/?totalservers=1&username=Yazhrod&key=lvgxp6e!cexm8i09p1d77wawh4fh9!abcffyic&host="
+exports.BOOTERAPI = "http://5.255.97.103/skid.php?host=";
